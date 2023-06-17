@@ -2023,6 +2023,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@interactjs/types@npm:1.10.17":
+  version: 1.10.17
+  resolution: "@interactjs/types@npm:1.10.17"
+  checksum: 7e2d5e9448c714b4b2e00a423c33c259719bec3be87914cba1c80058eaecc8d5a587dcb29dcbb837d8832a4cf0eb26d9456f00d800f66717984952fb731891ec
+  languageName: node
+  linkType: hard
+
 "@isaacs/cliui@npm:^8.0.2":
   version: 8.0.2
   resolution: "@isaacs/cliui@npm:8.0.2"
@@ -2165,7 +2172,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@juggle/resize-observer@npm:^3.3.1":
+"@juggle/resize-observer@npm:^3.3.1, @juggle/resize-observer@npm:^3.4.0":
   version: 3.4.0
   resolution: "@juggle/resize-observer@npm:3.4.0"
   checksum: 2505028c05cc2e17639fcad06218b1c4b60f932a4ebb4b41ab546ef8c157031ae377e3f560903801f6d01706dbefd4943b6c4704bf19ed86dfa1c62f1473a570
@@ -2242,6 +2249,13 @@ __metadata:
   version: 2.11.7
   resolution: "@sxzz/popperjs-es@npm:2.11.7"
   checksum: 109b6569b75196db798da22d8e23bdf5c395ea46633c68eebdbcc59f39cd1df67dc0cf98ae06e0edf668e62d0aff87b9858d3b305dcb49524b724c629d2ea8c1
+  languageName: node
+  linkType: hard
+
+"@popperjs/core@npm:^2.11.6":
+  version: 2.11.8
+  resolution: "@popperjs/core@npm:2.11.8"
+  checksum: e5c69fdebf52a4012f6a1f14817ca8e9599cb1be73dd1387e1785e2ed5e5f0862ff817f420a87c7fc532add1f88a12e25aeb010ffcbdc98eace3d55ce2139cf0
   languageName: node
   linkType: hard
 
@@ -3558,6 +3572,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vexip-ui/hooks@npm:^1.9.0":
+  version: 1.11.1
+  resolution: "@vexip-ui/hooks@npm:1.11.1"
+  dependencies:
+    "@juggle/resize-observer": ^3.4.0
+    "@popperjs/core": ^2.11.6
+    "@vexip-ui/utils": ^1.14.1
+  peerDependencies:
+    vue: ^3.2.25
+  checksum: 016a37d455e5c312b308ac8cd20ebca4be77ab9373828302c0370f5967dfc7940dd172ae8cda43af892c4f0da49abf3416fb3e2582960427cc0a15fcddb6b5b7
+  languageName: node
+  linkType: hard
+
+"@vexip-ui/utils@npm:^1.11.0, @vexip-ui/utils@npm:^1.14.1":
+  version: 1.14.1
+  resolution: "@vexip-ui/utils@npm:1.14.1"
+  checksum: b5e1696c0d3f698be55ce203eb33165714601ad2ed76b6ca9fd09e46c08e9962d1cfdd4bad6a2eb934ff635b8b936efc90e307637df388f9f1bae840c9c5940c
+  languageName: node
+  linkType: hard
+
 "@vitejs/plugin-vue@npm:^4.0.0, @vitejs/plugin-vue@npm:^4.1.0":
   version: 4.2.3
   resolution: "@vitejs/plugin-vue@npm:4.2.3"
@@ -4079,6 +4113,7 @@ __metadata:
     "@storybook/vue3-vite": ^7.0.21
     "@vitejs/plugin-vue": ^4.1.0
     element-plus: ^2.3.6
+    grid-layout-plus: ^1.0.2
     pinia: ^2.1.4
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -5863,6 +5898,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"grid-layout-plus@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "grid-layout-plus@npm:1.0.2"
+  dependencies:
+    "@vexip-ui/hooks": ^1.9.0
+    "@vexip-ui/utils": ^1.11.0
+    interactjs: ^1.10.17
+  peerDependencies:
+    vue: ^3.0.0
+  checksum: 97c6cd97fd62cd8188976eb26a63a4d2cfaca7acc1d44adb109af1f3299f93de16c5d1bc755b2a9cf9d5128596505b989007cfeaa9cd100c103e062dbcb3f615
+  languageName: node
+  linkType: hard
+
 "gunzip-maybe@npm:^1.4.2":
   version: 1.4.2
   resolution: "gunzip-maybe@npm:1.4.2"
@@ -6109,6 +6157,15 @@ __metadata:
   version: 2.0.4
   resolution: "inherits@npm:2.0.4"
   checksum: 4a48a733847879d6cf6691860a6b1e3f0f4754176e4d71494c41f3475553768b10f84b5ce1d40fbd0e34e6bfbb864ee35858ad4dd2cf31e02fc4a154b724d7f1
+  languageName: node
+  linkType: hard
+
+"interactjs@npm:^1.10.17":
+  version: 1.10.17
+  resolution: "interactjs@npm:1.10.17"
+  dependencies:
+    "@interactjs/types": 1.10.17
+  checksum: a3754aa1ca5600084b33902097051f435ea0c89e96992e0a54bb3c780bd59e10f95997bc6b2c98fcfc2f7289ef0a7df192e93e83cceec7e5612e8d5912d74720
   languageName: node
   linkType: hard
 
