@@ -3,10 +3,10 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 // you can import from 'lodash-es' or implement it by yourself
 import { throttle } from 'lodash';
 
-import { GridLayout } from 'grid-layout-plus'
+import { GridLayout, Layout } from 'grid-layout-plus'
 import PopoverButton from './PopoverButton.vue';
 
-const layout = ref([
+const layout = ref<Layout>([
   { x: 0, y: 0, w: 2, h: 2, i: '0' },
   { x: 2, y: 0, w: 2, h: 4, i: '1' },
   { x: 4, y: 0, w: 2, h: 5, i: '2' },
