@@ -124,15 +124,14 @@ function dragEnd() {
 </script>
 
 <template>
-  <div class="layout-json">
-    Displayed as <code>[x, y, w, h]</code>:
+  <div class="dashboard-layout">
+    <div class="dashboard-layout_info">
     <div class="columns">
       <div v-for="item in layout" :key="item.i" class="layout-item">
         <b>{{ item.i }}</b>: [{{ item.x }}, {{ item.y }}, {{ item.w }}, {{ item.h }}]
       </div>
     </div>
   </div>
-  <br />
   <PopoverButton
     @drag-for-add-widget="drag"
     @drag-end="dragEnd"
@@ -143,10 +142,23 @@ function dragEnd() {
         <span class="text">{{ item.i }}</span>
       </template>
     </GridLayout>
+    </div>
   </div>
 </template>
 
 <style scoped>
+.dashboard-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dashboard-layout_info {
+  padding: 10px;
+  background-color: #ddd;
+  border: 1px solid black;
+}
+
 .vgl-layout {
   background-color: #eee;
 }
@@ -162,13 +174,6 @@ function dragEnd() {
 
 :deep(.vgl-item--static) {
   background-color: #cce;
-}
-
-.layout-json {
-  padding: 10px;
-  margin-top: 10px;
-  background-color: #ddd;
-  border: 1px solid black;
 }
 
 .columns {
