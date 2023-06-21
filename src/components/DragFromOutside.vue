@@ -97,7 +97,7 @@ function dragEnd() {
     mouseAt.y < parentRect.bottom
 
   if (mouseInGrid) {
-    alert(`Dropped element props:\n${JSON.stringify(dragItem, ['x', 'y', 'w', 'h', 'i'], 2)}`)
+    // alert(`Dropped element props:\n${JSON.stringify(dragItem, ['x', 'y', 'w', 'h', 'i'], 2)}`)
     gridLayout.value.dragEvent('dragend', dropId, dragItem.x, dragItem.y, dragItem.h, dragItem.w)
     layout.value = layout.value.filter(item => item.i !== dropId)
   } else {
@@ -164,16 +164,6 @@ function dragEnd() {
   background-color: #cce;
 }
 
-.text {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  margin: auto;
-  font-size: 24px;
-  text-align: center;
-}
-
 .layout-json {
   padding: 10px;
   margin-top: 10px;
@@ -183,14 +173,5 @@ function dragEnd() {
 
 .columns {
   columns: 120px;
-}
-
-.droppable-element {
-  width: 150px;
-  padding: 10px;
-  margin: 10px 0;
-  text-align: center;
-  background-color: #fdd;
-  border: 1px solid black;
 }
 </style>
