@@ -14,6 +14,7 @@
   "dependencies": {
     "element-plus": "^2.3.6",
     "grid-layout-plus": "^1.0.2",
+    "lodash": "^4.17.21",
     "pinia": "^2.1.4",
     "vue": "^3.3"
   },
