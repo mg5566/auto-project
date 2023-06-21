@@ -8,9 +8,10 @@
     v-if="isOpen"
     class="controller"
     :draggable="true"
-    @dragstart="handleDragAndCopy"
+    @drag="handleDrag"
+    @dragend="handleDragEnd"
   >
-    추가해보든가.
+    drag me.
   </div>
   <PlusButton v-if="!isOpen" class="position" @click="handleOpen"/>
 </template>
@@ -19,11 +20,19 @@
 import { ref } from 'vue';
 import PlusButton from './buttons/PlusButton/PlusButton.vue';
 
+interface Emits {
+  (event: 'dragForAddWidget'): void;
+  (event: 'dragEnd'): void;
+}
+const emit = defineEmits<Emits>();
+
 const isOpen = ref(false);
 
-const handleDragAndCopy = (event: DragEvent) => {
-  console.log('드래그 시작');
-  console.log('드래그 시작 이벤트', event);
+const handleDrag = () => {
+  emit('dragForAddWidget');
+}
+const handleDragEnd = () => {
+  emit('dragEnd');
 }
 
 const handleOpen = () => {
@@ -48,8 +57,8 @@ const handleClose = () => {
   }
 
   .controller {
-    width: 200px;
-    height: 200px;
+    width: 126px;
+    height: 70px;
     background-color: aquamarine;
     /* 항상 최하단 오른쪽에 배치한다. */
     position: fixed;
@@ -62,14 +71,5 @@ const handleClose = () => {
     position: fixed;
     bottom: 1rem;
     right: 1rem;
-  }
-
-  .trigger {
-    /* 항상 최하단 오른쪽에 배치한다. */
-    position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-    padding: 2rem;
-    border-radius: 4rem;
   }
 </style>

@@ -1,11 +1,13 @@
 <template>
   <div class="app-container">
-    <DashboardLayout />
+    <!-- <DashboardLayout /> -->
+    <DragFromOutside />
   </div>
 </template>
 
 <script setup lang="ts">
-  import DashboardLayout from './components/DashboardLayout.vue';
+  // import DashboardLayout from './components/DashboardLayout.vue';
+  import DragFromOutside from './components/DragFromOutside.vue';
 </script>
 
 <style scoped>
