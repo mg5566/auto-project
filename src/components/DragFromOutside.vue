@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-// you can import from 'lodash-es' or implement it by yourself
 import { throttle } from 'lodash';
 
 import { GridLayout, Layout } from 'grid-layout-plus'
@@ -85,7 +84,7 @@ const drag = throttle(() => {
   }
 })
 
-function dragEnd() {
+const dragEnd = () => {
   const parentRect = wrapper.value?.getBoundingClientRect()
 
   if (!parentRect || !gridLayout.value) return
@@ -126,22 +125,23 @@ function dragEnd() {
 <template>
   <div class="dashboard-layout">
     <div class="dashboard-layout_info">
-    <div class="columns">
-      <div v-for="item in layout" :key="item.i" class="layout-item">
-        <b>{{ item.i }}</b>: [{{ item.x }}, {{ item.y }}, {{ item.w }}, {{ item.h }}]
+      Displayed as [x, y, w, h]:
+      <div class="columns">
+        <div v-for="item in layout" :key="item.i">
+          <b>{{ item.i }}</b>: [{{ item.x }}, {{ item.y }}, {{ item.w }}, {{ item.h }}]
+        </div>
       </div>
     </div>
-  </div>
-  <PopoverButton
-    @drag-for-add-widget="drag"
-    @drag-end="dragEnd"
-  />
-  <div ref="wrapper">
-    <GridLayout ref="gridLayout" v-model:layout="layout" :row-height="30">
-      <template #item="{ item }">
-        <span class="text">{{ item.i }}</span>
-      </template>
-    </GridLayout>
+    <PopoverButton
+      @drag-for-add-widget="drag"
+      @drag-end="dragEnd"
+    />
+    <div ref="wrapper">
+      <GridLayout ref="gridLayout" v-model:layout="layout" :row-height="30">
+        <template #item="{ item }">
+          <span class="text">{{ item.i }}</span>
+        </template>
+      </GridLayout>
     </div>
   </div>
 </template>
