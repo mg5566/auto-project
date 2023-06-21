@@ -12,11 +12,12 @@
   >
     추가해보든가.
   </div>
-  <button v-if="!isOpen" class="trigger" @click="handleOpen">클릭하면 터진다.</button>
+  <PlusButton v-if="!isOpen" class="position" @click="handleOpen"/>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import PlusButton from './buttons/PlusButton/PlusButton.vue';
 
 const isOpen = ref(false);
 
@@ -50,6 +51,13 @@ const handleClose = () => {
     width: 200px;
     height: 200px;
     background-color: aquamarine;
+    /* 항상 최하단 오른쪽에 배치한다. */
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  .position {
     /* 항상 최하단 오른쪽에 배치한다. */
     position: fixed;
     bottom: 1rem;
