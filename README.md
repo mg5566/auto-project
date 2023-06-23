@@ -1,4 +1,10 @@
 # AUTO Project
+
+# Project start
+```shell
+$ yarn
+$ yarn dev
+```
 ## Project Init Settings
 1. yarn 사용
 2. Pinia 사용
