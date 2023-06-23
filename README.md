@@ -1,4 +1,5 @@
 # AUTO Project
+# [DEMO PAGE](https://auto-project-seven.vercel.app/)
 
 # Project start
 ```shell
@@ -7,18 +8,27 @@ $ yarn dev
 ```
 ## Project Init Settings
 1. yarn 사용
-2. Pinia 사용
-3. TypeScript 사용
-4. vue 최신버전 사용 (3.3+)
-5. storybook 사용
+2. vite
+3. Pinia
+4. TypeScript
+5. vue 최신버전 사용 (3.3+)
+6. storybook 사용
+7. vue-router@4
+8. grid-layout-next
+9. element plus
+10. lodash
 
-## grid layout
+## grid layout plus
 
-vue3 에서 사용가능한 grid layout 을 적용한다.
-### 요구사항
+vue3 에서 사용가능한 grid layout 라이브러리를 적용합니다.
+
+[grid-layout-next](https://github.com/qmhc/grid-layout-plus)
+
+## 요구사항
 
 1. resizable
 2. draggable
+3. add element using drag from outside
 
 ---
 
