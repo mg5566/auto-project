@@ -132,10 +132,6 @@ const dragEnd = () => {
         </div>
       </div>
     </div>
-    <PopoverButton
-      @drag-for-add-widget="drag"
-      @drag-end="dragEnd"
-    />
     <div ref="wrapper">
       <GridLayout ref="gridLayout" v-model:layout="layout" :row-height="30">
         <template #item="{ item }">
@@ -144,6 +140,10 @@ const dragEnd = () => {
       </GridLayout>
     </div>
   </div>
+  <PopoverButton
+    @drag-for-add-widget="drag"
+    @drag-end="dragEnd"
+  />
 </template>
 
 <style scoped>
