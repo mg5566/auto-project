@@ -157,6 +157,12 @@ const dragEnd = () => {
   padding: 10px;
   background-color: #ddd;
   border: 1px solid black;
+
+  .columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
 }
 
 .vgl-layout {
@@ -176,7 +182,4 @@ const dragEnd = () => {
   background-color: #cce;
 }
 
-.columns {
-  columns: 120px;
-}
 </style>
