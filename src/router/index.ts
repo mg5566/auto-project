@@ -1,7 +1,7 @@
 import { RouteRecordRaw } from 'vue-router';
-import WithTS from '../pages/WithTS/WithTS.vue';
-import WithJS from '../pages/WithJS/WithJS.vue';
-import Fallback from '../pages/Fallback/Fallback.vue';
+import WithTS from '../pages/WithTS.vue';
+import WithJS from '../pages/WithJS.vue';
+import Fallback from '../pages/Fallback.vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
 
 export const routes: RouteRecordRaw[] = [
