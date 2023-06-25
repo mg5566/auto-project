@@ -124,7 +124,7 @@ const dragEnd = () => {
 
 <template>
   <div class="dashboard-layout">
-    <div class="dashboard-layout_info">
+    <div class="dashboard-layout__info">
       Displayed as [x, y, w, h]:
       <div class="columns">
         <div v-for="item in layout" :key="item.i">
@@ -146,17 +146,17 @@ const dragEnd = () => {
   />
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .dashboard-layout {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-}
 
-.dashboard-layout_info {
-  padding: 10px;
-  background-color: #ddd;
-  border: 1px solid black;
+  &__info {
+    padding: 10px;
+    background-color: #ddd;
+    border: 1px solid black;
+  }
 
   .columns {
     display: flex;
