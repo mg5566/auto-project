@@ -14,7 +14,7 @@
       </RouterLink>
     </div>
     <!-- github -->
-    <a href="https://github.com/mg5566/auto-project">
+    <a target="_blank" href="https://github.com/mg5566/auto-project">
       Go to Git Hub
     </a>
   </div>
