@@ -1,11 +1,11 @@
-<script setup lang="ts">
+<script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { throttle } from 'lodash';
 
-import { GridLayout, Layout } from 'grid-layout-plus'
+import { GridLayout } from 'grid-layout-plus'
 import PopoverButton from './PopoverButton.vue';
 
-const layout = ref<Layout>([
+const layout = ref([
   { x: 0, y: 0, w: 2, h: 2, i: '0' },
   { x: 2, y: 0, w: 2, h: 4, i: '1' },
   { x: 4, y: 0, w: 2, h: 5, i: '2' },
@@ -13,8 +13,8 @@ const layout = ref<Layout>([
   { x: 8, y: 0, w: 2, h: 3, i: '4' },
 ])
 
-const wrapper = ref<HTMLElement>()
-const gridLayout = ref<InstanceType<typeof GridLayout>>()
+const wrapper = ref()
+const gridLayout = ref()
 
 onMounted(() => {
   document.addEventListener('dragover', syncMousePosition)
@@ -26,7 +26,7 @@ onBeforeUnmount(() => {
 
 const mouseAt = { x: -1, y: -1 }
 
-function syncMousePosition(event: MouseEvent) {
+function syncMousePosition(event) {
   mouseAt.x = event.clientX
   mouseAt.y = event.clientY
 }
@@ -35,7 +35,7 @@ const dropId = 'drop'
 const dragItem = { x: -1, y: -1, w: 2, h: 2, i: '' }
 
 const drag = throttle(() => {
-  const parentRect = wrapper.value?.getBoundingClientRect()
+  const parentRect = wrapper.value.getBoundingClientRect()
 
   if (!parentRect || !gridLayout.value) return
 
@@ -85,7 +85,7 @@ const drag = throttle(() => {
 })
 
 const dragEnd = () => {
-  const parentRect = wrapper.value?.getBoundingClientRect()
+  const parentRect = wrapper.value.getBoundingClientRect()
 
   if (!parentRect || !gridLayout.value) return
 
@@ -124,6 +124,7 @@ const dragEnd = () => {
 
 <template>
   <div class="dashboard-layout">
+    <!-- TODO: add new component layout Info -->
     <div class="dashboard-layout_info">
       Displayed as [x, y, w, h]:
       <div class="columns">
@@ -135,7 +136,7 @@ const dragEnd = () => {
     <div ref="wrapper">
       <GridLayout ref="gridLayout" v-model:layout="layout" :row-height="30">
         <template #item="{ item }">
-          <span class="text">{{ item.i }}</span>
+          <span>{{ item.i }}</span>
         </template>
       </GridLayout>
     </div>
@@ -181,5 +182,4 @@ const dragEnd = () => {
 :deep(.vgl-item--static) {
   background-color: #cce;
 }
-
 </style>
