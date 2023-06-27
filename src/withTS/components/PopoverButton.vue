@@ -3,6 +3,7 @@
     v-if="isOpen"
     class="background"
     @click="handleClose"
+    @dragover="handleDragOver"
   ></div>
   <div
     v-if="isOpen"
@@ -23,6 +24,7 @@ import PlusButton from './buttons/PlusButton/PlusButton.vue';
 interface Emits {
   (event: 'dragForAddWidget'): void;
   (event: 'dragEnd'): void;
+  (event: 'dragOver', value: DragEvent): void;
 }
 const emit = defineEmits<Emits>();
 
@@ -33,6 +35,10 @@ const handleDrag = () => {
 }
 const handleDragEnd = () => {
   emit('dragEnd');
+}
+
+const handleDragOver = (event: DragEvent) => {
+  emit('dragOver', event);
 }
 
 const handleOpen = () => {
