@@ -1,5 +1,10 @@
 # AUTO Project
 # [DEMO PAGE](https://auto-project-seven.vercel.app/)
+page 구성
+1. /root - /with-ts 로 redirection
+2. /with-ts - ts 적용 page
+3. /with-js - js 적용 page (ts 없음)
+4. other paths - 그 외 page 들은 fallback 처리
 
 # Project start
 ```shell
