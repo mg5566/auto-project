@@ -2,17 +2,20 @@
   <div class="divider"></div>
 </template>
 
-<script setup lang="ts">
-import { computed } from 'vue';
+<script setup>
+  import { computed } from 'vue';
 
-  interface Props {
-    margin?: number;
-    height?: number;
-  }
-  const props = withDefaults(defineProps<Props>(), {
-    margin: 1,
-    height: 2,
-  });
+  // All props are optional by default, unless required: true is specified.
+  const props = defineProps({
+    margin: {
+      type: Number,
+      default: 1,
+    },
+    height: {
+      type: Number,
+      default: 2,
+    },
+  })
 
   const margin = computed(() => `${props.margin}px`);
   const height = computed(() => `${props.height}px`)
