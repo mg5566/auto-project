@@ -1,15 +1,18 @@
-import { GridLayout, Layout } from "grid-layout-plus";
-import { Ref, reactive } from "vue";
+import { GridLayout } from "grid-layout-plus";
+import { reactive } from "vue";
 import { throttle } from 'lodash';
 
 export const useGridLayout = (
-    layout: Ref<Layout>,
-    wrapper: Ref<HTMLElement | undefined>,
-    gridLayout: Ref<InstanceType<typeof GridLayout> | undefined>
+    layout,
+    wrapper,
+    gridLayout
   ) => {
   const mouseAt = reactive({ x: -1, y: -1 });
 
-  function handleDragOver(event: DragEvent) {
+  /**
+   * @param {DragEvent} event
+   */
+  function handleDragOver(event) {
     mouseAt.x = event.clientX
     mouseAt.y = event.clientY
   }
