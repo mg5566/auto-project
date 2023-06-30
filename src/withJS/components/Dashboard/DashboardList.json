@@ -1,0 +1,30 @@
+[
+	{
+		"rnum": 0,
+		"totalSize": 0,
+		"baseUserId": null,
+		"userId": "HKKWON",
+		"userName": "권희겸",
+		"dashboardId": "1",
+		"dashboardName": "테스트1",
+		"dashboardDesc": "테스트1",
+		"useYn": "Y",
+		"sessionTimeout": "Y",
+		"moniYn": "Y",
+		"isOwner": "Y"
+	},
+	{
+		"rnum": 0,
+		"totalSize": 0,
+		"baseUserId": null,
+		"userId": "CSW",
+		"userName": "최승원",
+		"dashboardId": "2",
+		"dashboardName": "테스트2",
+		"dashboardDesc": "테스트2",
+		"useYn": "Y",
+		"sessionTimeout": "N",
+		"moniYn": "Y",
+		"isOwner": "N"
+	}
+]
