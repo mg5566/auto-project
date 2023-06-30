@@ -19,21 +19,21 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
   import PanelItem from './PanelItem.vue';
-  import { Widget } from './Dashboard/WidgetList.type';
   import Divider from './Divider/Divider.vue';
 
-  interface Props {
-    widgetList: Widget[];
-  }
-  defineProps<Props>();
+  defineProps({
+    widgetList: {
+      type: Array,
+      required: true,
+    },
+  });
 
-  interface Emits {
-    (event: 'dragForAddWidget'): void;
-    (event: 'dragEnd'): void;
-  }
-  const emit = defineEmits<Emits>();
+  const emit = defineEmits({
+    dragForAddWidget: () => true,
+    dragEnd: () => true,
+  });
 
   const handleDrag = () => {
     emit('dragForAddWidget');
