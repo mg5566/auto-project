@@ -18,7 +18,7 @@
   import { ref } from 'vue';
   import PlusButton from './buttons/PlusButton/PlusButton.vue';
   import Panel from './Panel.vue';
-  import { dummyWidgetList } from './Dashboard/WidgetList.ts';
+  import { dummyWidgetList } from './Dashboard/WidgetList.js';
 
   const emit = defineEmits({
     dragForAddWidget: () => true,

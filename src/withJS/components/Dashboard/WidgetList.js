@@ -1,6 +1,4 @@
-import { Widget } from "./WidgetList.type";
-
-export const dummyWidgetList: Widget[] = [
+export const dummyWidgetList = [
 	{
 		panelId: 4,
 		panelVer: 1,
