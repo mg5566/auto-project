@@ -14,18 +14,27 @@
   <PlusButton v-if="!isOpen" class="position" @click="handleOpen"/>
 </template>
 
-<script setup lang="ts">
+<script setup>
   import { ref } from 'vue';
   import PlusButton from './buttons/PlusButton/PlusButton.vue';
   import Panel from './Panel.vue';
   import { dummyWidgetList } from './Dashboard/WidgetList.ts';
 
-  interface Emits {
-    (event: 'dragForAddWidget'): void;
-    (event: 'dragEnd'): void;
-    (event: 'dragOver', value: DragEvent): void;
-  }
-  const emit = defineEmits<Emits>();
+  const emit = defineEmits({
+    dragForAddWidget: () => true,
+    dragEnd: () => true,
+    /**
+     *
+     * @param {DragEvent} event
+     */
+    dragOver: (event) => {
+      if (event) {
+				return true;
+			}
+      console.warn('Invalid dragOver event payload')
+			return false;
+    }
+  })
 
   const isOpen = ref(false);
 
@@ -36,7 +45,11 @@
     emit('dragEnd');
   }
 
-  const handleDragOver = (event: DragEvent) => {
+  /**
+   *
+   * @param {DragEvent} event
+   */
+  const handleDragOver = (event) => {
     emit('dragOver', event);
   }
 
