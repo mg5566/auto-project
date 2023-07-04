@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <GridTable :tableData="tableData" />
 </template>
 
@@ -121,4 +121,4 @@
 	};
 
   console.log('dummy', dummy);
-</script>
+</script> -->
