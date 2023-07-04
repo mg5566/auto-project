@@ -1,4 +1,4 @@
-import { Layout, LayoutItem } from "grid-layout-plus";
+import { Layout } from "grid-layout-plus";
 import { throttle } from "lodash";
 import { defineStore } from "pinia";
 import { ref } from "vue";
