@@ -1,17 +1,20 @@
 <template>
-  <el-table :data="rowsData" :border="true" width="100%">
-    <el-table-column
-      v-for="column in columnsData"
-      :key="column.label"
-      :label="column.label"
-      :prop="column.prop"
-    />
-  </el-table>
+  <div ref="outerContainer" class="table-continer">
+    <el-table :data="rowsData" :border="true" width="100%" :max-height="maxHeight" table-layout="auto">
+      <el-table-column
+        v-for="column in columnsData"
+        :key="column.label"
+        :label="column.label"
+        :prop="column.prop"
+      />
+    </el-table>
+  </div>
 </template>
 
 <script setup lang="ts">
-  import { computed } from 'vue';
-import { TableData } from './GridTable';
+  import { computed, ref } from 'vue';
+  import { TableData } from './GridTable';
+  import { useElementBounding } from '@vueuse/core'
 
   interface Props {
     tableData: TableData;
@@ -25,7 +28,18 @@ import { TableData } from './GridTable';
   const columnsData = computed(() => {
     return props.tableData.columns;
   })
+
+  const outerContainer = ref<HTMLDivElement>();
+  const { height: outerHeight } = useElementBounding(outerContainer);
+  const maxHeight = computed(() => {
+    return outerHeight.value - 10;
+  });
 </script>
 
 <style scoped lang="scss">
+  .table-continer {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+  }
 </style>
