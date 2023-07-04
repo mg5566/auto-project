@@ -12,6 +12,7 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@vueuse/core": "^10.2.1",
     "element-plus": "^2.3.6",
     "grid-layout-plus": "^1.0.2",
     "lodash": "^4.17.21",

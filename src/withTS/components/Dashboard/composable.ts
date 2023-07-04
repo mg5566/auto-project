@@ -1,12 +1,14 @@
-import { GridLayout, Layout } from "grid-layout-plus";
+import { GridLayout } from "grid-layout-plus";
 import { Ref, reactive } from "vue";
 import { throttle } from 'lodash';
+import { useLayoutStore } from "../../../store/useLayoutStore";
 
 export const useGridLayout = (
-    layout: Ref<Layout>,
     wrapper: Ref<HTMLElement | undefined>,
     gridLayout: Ref<InstanceType<typeof GridLayout> | undefined>
   ) => {
+
+  const layoutStore = useLayoutStore();
   const mouseAt = reactive({ x: -1, y: -1 });
 
   function handleDragOver(event: DragEvent) {
@@ -28,17 +30,17 @@ export const useGridLayout = (
       mouseAt.y > parentRect.top &&
       mouseAt.y < parentRect.bottom
 
-    if (mouseInGrid && !layout.value.find(item => item.i === dropId)) {
-      layout.value.push({
-        x: (layout.value.length * 2) % 12,
-        y: layout.value.length + 12, // puts it at the bottom
+    if (mouseInGrid && !layoutStore.layout.find(item => item.i === dropId)) {
+      layoutStore.layout.push({
+        x: (layoutStore.layout.length * 2) % 12,
+        y: layoutStore.layout.length + 12, // puts it at the bottom
         w: 2,
         h: 2,
         i: dropId
       })
     }
 
-    const index = layout.value.findIndex(item => item.i === dropId)
+    const index = layoutStore.layout.findIndex(item => item.i === dropId)
 
     if (index !== -1) {
       const item = gridLayout.value.getItem(dropId)
@@ -58,11 +60,11 @@ export const useGridLayout = (
       if (mouseInGrid) {
         gridLayout.value.dragEvent('dragstart', dropId, newPos.x, newPos.y, dragItem.h, dragItem.w)
         dragItem.i = String(index)
-        dragItem.x = layout.value[index].x
-        dragItem.y = layout.value[index].y
+        dragItem.x = layoutStore.layout[index].x
+        dragItem.y = layoutStore.layout[index].y
       } else {
         gridLayout.value.dragEvent('dragend', dropId, newPos.x, newPos.y, dragItem.h, dragItem.w)
-        layout.value = layout.value.filter(item => item.i !== dropId)
+        layoutStore.layout = layoutStore.layout.filter(item => item.i !== dropId)
       }
     }
   });
@@ -80,12 +82,12 @@ export const useGridLayout = (
 
     if (mouseInGrid) {
       gridLayout.value.dragEvent('dragend', dropId, dragItem.x, dragItem.y, dragItem.h, dragItem.w)
-      layout.value = layout.value.filter(item => item.i !== dropId)
+      layoutStore.layout = layoutStore.layout.filter(item => item.i !== dropId)
     } else {
       return
     }
 
-    layout.value.push({
+    layoutStore.layout.push({
       x: dragItem.x,
       y: dragItem.y,
       w: dragItem.w,
