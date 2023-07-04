@@ -37,7 +37,8 @@
     <div ref="wrapper">
       <GridLayout ref="gridLayout" v-model:layout="layoutStore.layout" :row-height="30">
         <template #item="{ item }">
-          <span class="text">{{ item.i }}</span>
+          <!-- <span class="text">{{ item.i }}</span> -->
+          <Widget :widget-id="item.i" />
         </template>
       </GridLayout>
     </div>
