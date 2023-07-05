@@ -17,7 +17,7 @@ export const useGridLayout = (
   }
 
   const dropId = 'drop'
-  const dragItem = { x: -1, y: -1, w: 2, h: 2, i: '' }
+  const dragItem = { x: -1, y: -1, w: 3, h: 4, i: '' }
 
   const handleDrag = throttle(() => {
     const parentRect = wrapper.value?.getBoundingClientRect()
@@ -34,8 +34,8 @@ export const useGridLayout = (
       layoutStore.layout.push({
         x: (layoutStore.layout.length * 2) % 12,
         y: layoutStore.layout.length + 12, // puts it at the bottom
-        w: 2,
-        h: 2,
+        w: 3,
+        h: 4,
         i: dropId
       })
     }
