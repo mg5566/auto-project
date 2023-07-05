@@ -140,27 +140,27 @@
 			}
 		],
 		"rows": [
-            {
-                "stat": "2",
-                "color": "orange",
-                "DATA3": "2022-09-03",
-                "DATA2": "3555",
-                "DATA1": "CAR2"
-            },
-            {
-                "stat": "3",
-                "color": "red",
-                "DATA3": "2022-09-14",
-                "DATA2": "2446",
-                "DATA1": "CAR1"
-            },
-            {
-                "stat": "999",
-                "DATA3": "2022-09-05",
-                "DATA2": "5655",
-                "DATA1": "CAR3"
-            }
-        ]
+      {
+        "stat": "2",
+        "color": "orange",
+        "DATA3": "2022-09-03",
+        "DATA2": "3555",
+        "DATA1": "CAR2"
+      },
+      {
+        "stat": "3",
+        "color": "red",
+        "DATA3": "2022-09-14",
+        "DATA2": "2446",
+        "DATA1": "CAR1"
+      },
+      {
+        "stat": "999",
+        "DATA3": "2022-09-05",
+        "DATA2": "5655",
+        "DATA1": "CAR3"
+      }
+    ]
 	},
 	{
 		"userId": "HKKWON",
