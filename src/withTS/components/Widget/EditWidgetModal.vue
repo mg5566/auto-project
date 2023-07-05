@@ -1,6 +1,9 @@
 <template>
+  <!-- TODO: dialog template 작성 및 적용 -->
   <el-dialog v-model="isOpen">
     <div>test {{ selectedWidget }}</div>
+    <!-- color 변경 -->
+    <!-- align 변경 -->
   </el-dialog>
 </template>
 
