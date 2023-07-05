@@ -1,6 +1,39 @@
+<template>
+  <div class="dashboard-layout">
+    <div class="dashboard-layout__info">
+      Displayed as [x, y, w, h]:
+      <div class="columns">
+        <div v-for="item in layoutStore.layout" :key="item.i">
+          <b>{{ item.i }}</b>: [{{ item.x }}, {{ item.y }}, {{ item.w }}, {{ item.h }}]
+        </div>
+      </div>
+    </div>
+    <div ref="wrapper">
+      <GridLayout ref="gridLayout" v-model:layout="layoutStore.layout" :row-height="30">
+        <GridItem
+          v-for="item in layoutStore.layout"
+          :key="item.i"
+          :x="item.x"
+          :y="item.y"
+          :w="item.w"
+          :h="item.h"
+          :i="item.i"
+        >
+          <Widget :widget-id="item.i.toString()" />
+        </GridItem>
+      </GridLayout>
+    </div>
+  </div>
+  <PopoverButton
+    @drag-for-add-widget="handleDrag"
+    @drag-end="handleDragEnd"
+    @drag-over="handleDragOver"
+  />
+</template>
+
 <script setup lang="ts">
   import { ref } from 'vue'
-  import { GridLayout } from 'grid-layout-plus'
+  import { GridLayout, GridItem } from 'grid-layout-plus'
   import PopoverButton from '../PopoverButton.vue';
   import { useGridLayout } from './composable';
   import { useLayoutStore } from '../../../store/useLayoutStore';
@@ -23,32 +56,6 @@
     handleDragEnd
   } = useGridLayout(wrapper, gridLayout);
 </script>
-
-<template>
-  <div class="dashboard-layout">
-    <div class="dashboard-layout__info">
-      Displayed as [x, y, w, h]:
-      <div class="columns">
-        <div v-for="item in layoutStore.layout" :key="item.i">
-          <b>{{ item.i }}</b>: [{{ item.x }}, {{ item.y }}, {{ item.w }}, {{ item.h }}]
-        </div>
-      </div>
-    </div>
-    <div ref="wrapper">
-      <GridLayout ref="gridLayout" v-model:layout="layoutStore.layout" :row-height="30">
-        <template #item="{ item }">
-          <!-- <span class="text">{{ item.i }}</span> -->
-          <Widget :widget-id="item.i" />
-        </template>
-      </GridLayout>
-    </div>
-  </div>
-  <PopoverButton
-    @drag-for-add-widget="handleDrag"
-    @drag-end="handleDragEnd"
-    @drag-over="handleDragOver"
-  />
-</template>
 
 <style scoped lang="scss">
 .dashboard-layout {
