@@ -12,6 +12,7 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@tanstack/vue-query": "^4.29.20",
     "@vueuse/core": "^10.2.1",
     "element-plus": "^2.3.6",
     "grid-layout-plus": "^1.0.2",
@@ -38,5 +39,8 @@
     "vite": "^4.3.9",
     "vue-tsc": "^1.4.2"
   },
-  "packageManager": "yarn@3.6.0"
+  "packageManager": "yarn@3.6.0",
+  "msw": {
+    "workerDirectory": "public"
+  }
 }
