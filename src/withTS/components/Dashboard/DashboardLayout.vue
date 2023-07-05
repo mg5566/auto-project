@@ -18,6 +18,8 @@
           :w="item.w"
           :h="item.h"
           :i="item.i"
+          :min-w="3"
+          :min-h="4"
         >
           <Widget :widget-id="item.i.toString()" />
         </GridItem>
