@@ -3,21 +3,25 @@
   <div class="widget">
     <!-- header -->
     <div class="widget__header">
-      <div>{{ title }}</div>
+      <div>{{ wigetTitle }}</div>
       <a class="widget__header__edit" @click="handleOpenEditor">edit</a>
     </div>
     <!-- body -->
     <div class="widget__body">
       <!-- {{ data }} -->
       <!-- TODO: HOC 적용하기 -->
-      <TestPage />
+      <!-- <TestPage /> -->
+      <GridTable v-loading="isLoading" :tableData="tableData" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
   import { computed } from 'vue';
-  import TestPage from '../../../pages/TestPage.vue'
+  // import TestPage from '../../../pages/TestPage.vue'
+  import { usePanel } from '../../../services/usePanel';
+  import GridTable from '../table/GridTable/GridTable.vue';
+  import { TableData } from '../table/GridTable/GridTable';
 
   interface Props {
     // TODO: widget id 만 받아서 fetching 을 진행하자
@@ -30,9 +34,9 @@
   }
   const emit = defineEmits<Emits>();
 
-  const title = computed(() => {
-    return props.widgetId;
-  });
+  // const title = computed(() => {
+  //   return props.widgetId;
+  // });
   /*
   const data = computed(() => {
     // TODO: type 에 따른 widget 이 생길 수 있도록 변경하기
@@ -46,6 +50,21 @@
     console.log('click edit');
     emit('openWidgetEditor', props.widgetId);
   };
+
+  /**
+   * fetch
+   */
+  const { data, isLoading } = usePanel(props.widgetId, computed(() => !!props.widgetId));
+
+  const wigetTitle = computed(() => {
+    const title = data.value?.title;
+    return title;
+  })
+  const tableData = computed<TableData>(() => {
+    const tempData = data.value ?? { columns: [], rows: [] } as TableData;
+    return tempData;
+  })
+
 </script>
 
 <style scoped lang="scss">
