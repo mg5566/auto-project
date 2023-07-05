@@ -21,7 +21,10 @@
           :min-w="3"
           :min-h="4"
         >
-          <Widget :widget-id="item.i.toString()" />
+          <Widget
+            :widget-id="item.i.toString()"
+            @openWidgetEditor="handleOpenWidgetEditor"
+          />
         </GridItem>
       </GridLayout>
     </div>
@@ -31,6 +34,7 @@
     @drag-end="handleDragEnd"
     @drag-over="handleDragOver"
   />
+  <EditWidgetModal v-model="isOpenWidgetEditor" :selectedWidget="selectedWidget"/>
 </template>
 
 <script setup lang="ts">
@@ -40,6 +44,7 @@
   import { useGridLayout } from './composable';
   import { useLayoutStore } from '../../../store/useLayoutStore';
   import Widget from '../Widget/Widget.vue';
+  import EditWidgetModal from '../Widget/EditWidgetModal.vue';
 
   const layoutStore = useLayoutStore();
   // const layout = ref<Layout>([
@@ -57,6 +62,14 @@
     handleDragOver,
     handleDragEnd
   } = useGridLayout(wrapper, gridLayout);
+
+  const isOpenWidgetEditor = ref(false);
+  const selectedWidget = ref('');
+  const handleOpenWidgetEditor = (id: string) => {
+    isOpenWidgetEditor.value = true;
+    console.log('open widget editor', id);
+    selectedWidget.value = id;
+  };
 </script>
 
 <style scoped lang="scss">
