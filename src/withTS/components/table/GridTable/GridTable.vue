@@ -1,6 +1,6 @@
 <template>
   <div ref="outerContainer" class="table-continer">
-    <el-table :data="rowsData" :border="true" width="100%" :max-height="maxHeight" table-layout="auto">
+    <el-table :data="rowsData" :border="true" width="100%" :height="maxHeight" table-layout="auto">
       <el-table-column
         v-for="column in columnsData"
         :key="column.label"
@@ -32,6 +32,7 @@
   const outerContainer = ref<HTMLDivElement>();
   const { height: outerHeight } = useElementBounding(outerContainer);
   const maxHeight = computed(() => {
+    console.log(outerHeight.value);
     return outerHeight.value - 10;
   });
 </script>

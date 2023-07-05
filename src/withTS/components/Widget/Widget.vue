@@ -3,7 +3,8 @@
   <div class="widget">
     <!-- header -->
     <div class="widget__header">
-      {{ title }}
+      <div>{{ title }}</div>
+      <a class="widget__header__edit" @click="handleOpenEditor">edit</a>
     </div>
     <!-- body -->
     <div class="widget__body">
@@ -24,6 +25,11 @@
   }
   const props = defineProps<Props>();
 
+  interface Emits {
+    (e: 'openWidgetEditor', id: string): void;
+  }
+  const emit = defineEmits<Emits>();
+
   const title = computed(() => {
     return props.widgetId;
   });
@@ -35,6 +41,11 @@
     return props.widgetId;
   });
   */
+
+  const handleOpenEditor = () => {
+    console.log('click edit');
+    emit('openWidgetEditor', props.widgetId);
+  };
 </script>
 
 <style scoped lang="scss">
@@ -46,6 +57,16 @@
     &__header {
       height: 30px;
       background-color: #ddd;
+
+      display: flex;
+      justify-content: space-between;
+
+      padding: 0 1rem;
+
+      &__edit {
+        cursor: pointer;
+        border: 1px solid black;
+      }
     }
 
     &__body {
