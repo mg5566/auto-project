@@ -106,6 +106,7 @@ export const useGridLayout = (
   }
 
   return {
+    layoutStore,
     handleDragOver,
     handleDrag,
     handleDragEnd
