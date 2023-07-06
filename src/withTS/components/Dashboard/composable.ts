@@ -7,7 +7,6 @@ export const useGridLayout = (
     wrapper: Ref<HTMLElement | undefined>,
     gridLayout: Ref<InstanceType<typeof GridLayout> | undefined>
   ) => {
-
   const layoutStore = useLayoutStore();
   const mouseAt = reactive({ x: -1, y: -1 });
 
@@ -17,9 +16,9 @@ export const useGridLayout = (
   }
 
   const dropId = 'drop'
-  const dragItem = { x: -1, y: -1, w: 3, h: 4, i: '' }
+  const dragItem = { x: -1, y: -1, w: 3, h: 4, i: '', panelId: '' }
 
-  const handleDrag = throttle(() => {
+  const handleDrag = throttle<(id: string) => void>((id) => {
     const parentRect = wrapper.value?.getBoundingClientRect()
 
     if (!parentRect || !gridLayout.value) return
@@ -36,7 +35,8 @@ export const useGridLayout = (
         y: layoutStore.layout.length + 12, // puts it at the bottom
         w: 3,
         h: 4,
-        i: dropId
+        i: dropId,
+        panelId: '',
       })
     }
 
@@ -62,6 +62,7 @@ export const useGridLayout = (
         dragItem.i = String(index)
         dragItem.x = layoutStore.layout[index].x
         dragItem.y = layoutStore.layout[index].y
+        dragItem.panelId = id;
       } else {
         gridLayout.value.dragEvent('dragend', dropId, newPos.x, newPos.y, dragItem.h, dragItem.w)
         layoutStore.layout = layoutStore.layout.filter(item => item.i !== dropId)
@@ -92,7 +93,8 @@ export const useGridLayout = (
       y: dragItem.y,
       w: dragItem.w,
       h: dragItem.h,
-      i: dragItem.i
+      i: dragItem.i,
+      panelId: dragItem.panelId
     })
     gridLayout.value.dragEvent('dragend', dragItem.i, dragItem.x, dragItem.y, dragItem.h, dragItem.w)
 

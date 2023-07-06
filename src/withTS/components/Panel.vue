@@ -10,7 +10,7 @@
         v-for="widget in widgetList"
         :key="widget.panelId"
         :draggable="true"
-        @drag="handleDrag"
+        @drag="handleDrag(widget.panelId.toString())"
         @dragend="handleDragEnd"
       >
         {{ widget.panelName }}
@@ -30,13 +30,13 @@
   defineProps<Props>();
 
   interface Emits {
-    (event: 'dragForAddWidget'): void;
+    (event: 'dragForAddWidget', id: string): void;
     (event: 'dragEnd'): void;
   }
   const emit = defineEmits<Emits>();
 
-  const handleDrag = () => {
-    emit('dragForAddWidget');
+  const handleDrag = (id: string) => {
+    emit('dragForAddWidget', id);
   }
   const handleDragEnd = () => {
     emit('dragEnd');

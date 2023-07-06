@@ -21,7 +21,7 @@
   import { dummyWidgetList } from './Dashboard/WidgetList.ts';
 
   interface Emits {
-    (event: 'dragForAddWidget'): void;
+    (event: 'dragForAddWidget', id: string): void;
     (event: 'dragEnd'): void;
     (event: 'dragOver', value: DragEvent): void;
   }
@@ -29,8 +29,8 @@
 
   const isOpen = ref(false);
 
-  const handleDrag = () => {
-    emit('dragForAddWidget');
+  const handleDrag = (id: string) => {
+    emit('dragForAddWidget', id);
   }
   const handleDragEnd = () => {
     emit('dragEnd');
