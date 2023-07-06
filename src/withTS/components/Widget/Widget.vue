@@ -8,7 +8,6 @@
     </div>
     <!-- body -->
     <div class="widget__body">
-      <!-- {{ data }} -->
       <!-- TODO: HOC 적용하기 -->
       <!-- <TestPage /> -->
       <GridTable v-loading="isLoading" :tableData="tableData" />
@@ -52,12 +51,12 @@
   };
 
   /**
-   * fetch
+   * fetch Panel
    */
   const { data, isLoading } = usePanel(props.widgetId, computed(() => !!props.widgetId));
 
   const wigetTitle = computed(() => {
-    const title = data.value?.title;
+    const title = data.value?.panelName;
     return title;
   })
   const tableData = computed<TableData>(() => {
