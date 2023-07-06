@@ -92,6 +92,7 @@
 }
 
 .vgl-layout {
+  min-height: 20rem;
   background-color: #eee;
 }
 
