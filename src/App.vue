@@ -1,7 +1,9 @@
 <template>
-  <NavBar class="app-header" />
-  <div class="app-body">
-    <RouterView />
+  <div class="app-container">
+    <NavBar class="app-container__header" />
+    <div class="app-container__body">
+      <RouterView />
+    </div>
   </div>
 </template>
 
@@ -10,14 +12,19 @@
 </script>
 
 <style scoped lang="scss">
-  .app-header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    width: auto;
-  }
+  .app-container {
+    display: flex;
+    flex-direction: column;
 
-  .app-body {
-    padding: 1.5rem;
+    &__header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: auto;
+    }
+
+    &__body {
+      padding: 1.5rem;
+    }
   }
 </style>

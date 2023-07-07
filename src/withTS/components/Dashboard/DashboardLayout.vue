@@ -22,7 +22,7 @@
           :min-h="4"
         >
           <Widget
-            :widget-id="item.i.toString()"
+            :widget-id="item.panelId"
             @openWidgetEditor="handleOpenWidgetEditor"
           />
         </GridItem>
@@ -42,22 +42,14 @@
   import { GridLayout, GridItem } from 'grid-layout-plus'
   import PopoverButton from '../PopoverButton.vue';
   import { useGridLayout } from './composable';
-  import { useLayoutStore } from '../../../store/useLayoutStore';
   import Widget from '../Widget/Widget.vue';
   import EditWidgetModal from '../Widget/EditWidgetModal.vue';
 
-  const layoutStore = useLayoutStore();
-  // const layout = ref<Layout>([
-  //   { x: 0, y: 0, w: 2, h: 2, i: '0' },
-  //   { x: 2, y: 0, w: 2, h: 4, i: '1' },
-  //   { x: 4, y: 0, w: 2, h: 5, i: '2' },
-  //   { x: 6, y: 0, w: 2, h: 3, i: '3' },
-  //   { x: 8, y: 0, w: 2, h: 3, i: '4' },
-  // ])
   const wrapper = ref<HTMLElement>()
   const gridLayout = ref<InstanceType<typeof GridLayout>>();
 
   const {
+    layoutStore,
     handleDrag,
     handleDragOver,
     handleDragEnd
@@ -67,7 +59,6 @@
   const selectedWidget = ref('');
   const handleOpenWidgetEditor = (id: string) => {
     isOpenWidgetEditor.value = true;
-    console.log('open widget editor', id);
     selectedWidget.value = id;
   };
 </script>
@@ -92,6 +83,7 @@
 }
 
 .vgl-layout {
+  min-height: 20rem;
   background-color: #eee;
 }
 

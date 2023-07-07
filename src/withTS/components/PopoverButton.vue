@@ -6,6 +6,7 @@
     @dragover="handleDragOver"
   ></div>
   <Panel
+    v-loading="isLoading"
     v-if="isOpen"
     :widgetList="widgetList"
     @dragForAddWidget="handleDrag"
@@ -15,13 +16,13 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { computed, ref } from 'vue';
   import PlusButton from './buttons/PlusButton/PlusButton.vue';
   import Panel from './Panel.vue';
-  import { dummyWidgetList } from './Dashboard/WidgetList.ts';
+  import { usePanels } from '../../services/usePanels';
 
   interface Emits {
-    (event: 'dragForAddWidget'): void;
+    (event: 'dragForAddWidget', id: string): void;
     (event: 'dragEnd'): void;
     (event: 'dragOver', value: DragEvent): void;
   }
@@ -29,8 +30,8 @@
 
   const isOpen = ref(false);
 
-  const handleDrag = () => {
-    emit('dragForAddWidget');
+  const handleDrag = (id: string) => {
+    emit('dragForAddWidget', id);
   }
   const handleDragEnd = () => {
     emit('dragEnd');
@@ -48,8 +49,8 @@
     isOpen.value = false;
   }
 
-  // fetch widget list
-  const widgetList = ref(dummyWidgetList);
+  // fetch Panel list
+  const { data: widgetList, isLoading } = usePanels(computed(() => true));
 </script>
 
 <style scoped>

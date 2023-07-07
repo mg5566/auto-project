@@ -1,12 +1,10 @@
 import { useQuery } from "@tanstack/vue-query";
-import axios from "axios";
 import { ComputedRef } from "vue";
 
 const getPanels = async () => {
   try {
-    const response = await axios.get("/panels");
-    console.log('response', response);
-    return response.data();
+    const response = await fetch("/panels");
+    return response.json();
   } catch (error) {
     console.error(error);
   }

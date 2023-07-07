@@ -1,16 +1,21 @@
-import { Layout } from "grid-layout-plus";
+import { LayoutItem } from "grid-layout-plus";
 import { throttle } from "lodash";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
 export const useLayoutStore = defineStore('layout', () => {
-  const layout = ref<Layout>([
-    { x: 0, y: 0, w: 3, h: 4, i: '0' },
-    { x: 3, y: 0, w: 3, h: 4, i: '1' },
-    { x: 6, y: 0, w: 3, h: 5, i: '2' },
-    { x: 9, y: 0, w: 3, h: 5, i: '3' },
-    { x: 9, y: 0, w: 3, h: 6, i: '4' },
+  const layout = ref<(LayoutItem & { panelId: string})[]>([
+    // { x: 0, y: 0, w: 3, h: 4, i: '0', panelId: '0' },
+    // { x: 3, y: 0, w: 3, h: 4, i: '1', panelId: '1' },
+    // { x: 6, y: 0, w: 3, h: 5, i: '2', panelId: '2' },
+    // { x: 9, y: 0, w: 3, h: 5, i: '3', panelId: '3' },
+    // { x: 9, y: 0, w: 3, h: 6, i: '4', panelId: '4' },
   ])
+
+  // TODO: layout 을 update 하는 함수를 만들어야합니다.
+  // delete, add
+  // const deleteLayout = (id: string) => {}
+  // const addLayout = (layoutItem: LayoutItem) => {}
 
   type ModifyLayout = (id: string, width: number, height: number) => void;
   const modifyLayout = throttle<ModifyLayout>((id, width, height) => {

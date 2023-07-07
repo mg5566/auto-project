@@ -32,7 +32,7 @@
   const outerContainer = ref<HTMLDivElement>();
   const { height: outerHeight } = useElementBounding(outerContainer);
   const maxHeight = computed(() => {
-    console.log(outerHeight.value);
+    // console.log(outerHeight.value);
     return outerHeight.value - 10;
   });
 </script>
