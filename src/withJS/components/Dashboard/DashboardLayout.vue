@@ -1,41 +1,30 @@
-<script setup>
-  import { ref } from 'vue'
-  import { GridLayout } from 'grid-layout-plus'
-  import PopoverButton from '../PopoverButton.vue';
-  import { useGridLayout } from './composable';
-
-  const layout = ref([
-    { x: 0, y: 0, w: 2, h: 2, i: '0' },
-    { x: 2, y: 0, w: 2, h: 4, i: '1' },
-    { x: 4, y: 0, w: 2, h: 5, i: '2' },
-    { x: 6, y: 0, w: 2, h: 3, i: '3' },
-    { x: 8, y: 0, w: 2, h: 3, i: '4' },
-  ])
-  const wrapper = ref()
-  const gridLayout = ref();
-
-  const {
-    handleDrag,
-    handleDragOver,
-    handleDragEnd
-  } = useGridLayout(layout, wrapper, gridLayout);
-</script>
-
 <template>
   <div class="dashboard-layout">
     <div class="dashboard-layout__info">
       Displayed as [x, y, w, h]:
       <div class="columns">
-        <div v-for="item in layout" :key="item.i">
+        <div v-for="item in layoutStore.layout" :key="item.i">
           <b>{{ item.i }}</b>: [{{ item.x }}, {{ item.y }}, {{ item.w }}, {{ item.h }}]
         </div>
       </div>
     </div>
     <div ref="wrapper">
-      <GridLayout ref="gridLayout" v-model:layout="layout" :row-height="30">
-        <template #item="{ item }">
-          <span class="text">{{ item.i }}</span>
-        </template>
+      <GridLayout ref="gridLayout" v-model:layout="layoutStore.layout" :row-height="30">
+        <GridItem
+          v-for="item in layoutStore.layout"
+          :key="item.i"
+          :x="item.x"
+          :y="item.y"
+          :w="item.w"
+          :h="item.h"
+          :i="item.i"
+          :min-w="3"
+          :min-h="4"
+        >
+          <Widget
+            :widget-id="item.panelId"
+          />
+        </GridItem>
       </GridLayout>
     </div>
   </div>
@@ -45,6 +34,24 @@
     @drag-over="handleDragOver"
   />
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+  import { GridLayout, GridItem } from 'grid-layout-plus'
+  import PopoverButton from '../PopoverButton.vue';
+  import { useGridLayout } from './composable';
+  import Widget from '../Widget/Widget.vue';
+
+  const wrapper = ref()
+  const gridLayout = ref();
+
+  const {
+    layoutStore,
+    handleDrag,
+    handleDragOver,
+    handleDragEnd
+  } = useGridLayout(wrapper, gridLayout);
+</script>
 
 <style scoped lang="scss">
 .dashboard-layout {
@@ -66,6 +73,7 @@
 }
 
 .vgl-layout {
+  min-height: 20rem;
   background-color: #eee;
 }
 

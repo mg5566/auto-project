@@ -12,16 +12,17 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
   import { computed } from 'vue';
   import { usePanel } from '../../../services/usePanel';
   import GridTable from '../table/GridTable/GridTable.vue';
-  import { TableData } from '../table/GridTable/GridTable.type';
 
-  interface Props {
-    widgetId: string;
-  }
-  const props = defineProps<Props>();
+  const props = defineProps({
+    widgetId: {
+      type: String,
+      required: true
+    }
+  });
 
   // interface Emits {
   //   (e: 'openWidgetEditor', id: string): void;
@@ -42,8 +43,8 @@
     const title = data.value?.panelName;
     return title;
   })
-  const tableData = computed<TableData>(() => {
-    const tempData = data.value ?? { columns: [], rows: [] } as TableData;
+  const tableData = computed(() => {
+    const tempData = data.value ?? { columns: [], rows: [] };
     return tempData;
   })
 </script>

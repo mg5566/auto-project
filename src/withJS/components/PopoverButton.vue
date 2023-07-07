@@ -15,13 +15,23 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue';
+  import { ref, computed } from 'vue';
   import PlusButton from './buttons/PlusButton/PlusButton.vue';
   import Panel from './Panel.vue';
-  import { dummyWidgetList } from './Dashboard/WidgetList.js';
+  import { usePanels } from '../../services/usePanels';
 
   const emit = defineEmits({
-    dragForAddWidget: () => true,
+    /**
+     *
+     * @param {string} id
+     */
+    dragForAddWidget: (id) => {
+      if (id) {
+        return true;
+      }
+      console.warn('Invalid dragForAddWidget event payload')
+      return false;
+    },
     dragEnd: () => true,
     /**
      *
@@ -38,8 +48,12 @@
 
   const isOpen = ref(false);
 
-  const handleDrag = () => {
-    emit('dragForAddWidget');
+  /**
+   *
+   * @param {string} id
+   */
+  const handleDrag = (id) => {
+    emit('dragForAddWidget', id);
   }
   const handleDragEnd = () => {
     emit('dragEnd');
@@ -61,8 +75,8 @@
     isOpen.value = false;
   }
 
-  // fetch widget list
-  const widgetList = ref(dummyWidgetList);
+  // fetch Panel list
+  const { data: widgetList, isLoading } = usePanels(computed(() => true));
 </script>
 
 <style scoped>

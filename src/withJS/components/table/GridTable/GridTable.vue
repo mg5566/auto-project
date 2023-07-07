@@ -11,16 +11,16 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
   import { computed, ref } from 'vue';
-  import { TableData } from './GridTable.type';
   import { useElementBounding } from '@vueuse/core'
 
-  interface Props {
-    tableData: TableData;
-  }
-
-  const props = defineProps<Props>();
+  const props = defineProps({
+    tableData: {
+      type: Object,
+      required: true,
+    },
+  });
 
   const rowsData = computed(() => {
     return props.tableData.rows;
@@ -29,7 +29,7 @@
     return props.tableData.columns;
   })
 
-  const outerContainer = ref<HTMLDivElement>();
+  const outerContainer = ref();
   const { height: outerHeight } = useElementBounding(outerContainer);
   const maxHeight = computed(() => {
     return outerHeight.value - 10;

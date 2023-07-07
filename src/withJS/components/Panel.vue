@@ -10,7 +10,7 @@
         v-for="widget in widgetList"
         :key="widget.panelId"
         :draggable="true"
-        @drag="handleDrag"
+        @drag="handleDrag(widget.panelId.toString())"
         @dragend="handleDragEnd"
       >
         {{ widget.panelName }}
@@ -31,12 +31,26 @@
   });
 
   const emit = defineEmits({
-    dragForAddWidget: () => true,
+    /**
+     *
+     * @param {string} id
+     */
+    dragForAddWidget: (id) => {
+      if(id && typeof id === 'string') {
+        return true;
+      }
+      console.error('Invalid dragForAddWidget event payload')
+      return false;
+    },
     dragEnd: () => true,
   });
 
-  const handleDrag = () => {
-    emit('dragForAddWidget');
+  /**
+   *
+   * @param {string} id
+   */
+  const handleDrag = (id) => {
+    emit('dragForAddWidget', id);
   }
   const handleDragEnd = () => {
     emit('dragEnd');
