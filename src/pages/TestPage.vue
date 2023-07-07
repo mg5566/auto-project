@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-  import { TableData } from '../withTS/components/table/GridTable/GridTable';
+  import { TableData } from '../withTS/components/table/GridTable/GridTable.type';
   import GridTable from '../withTS/components/table/GridTable/GridTable.vue';
 
   const dummy: TableData = {
