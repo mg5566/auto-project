@@ -1,35 +1,14 @@
 <template>
   <div class="test">
-    <v-chart
-    class="echart"
-      :option="option"
-      :autoresize="true"
-    />
+    <BaseChart :option="option" />
   </div>
 </template>
 
 <script setup lang="ts">
-  import { use } from 'echarts/core';
-  import { CanvasRenderer } from 'echarts/renderers';
-  import { PieChart } from 'echarts/charts';
-  import {
-    TitleComponent,
-    TooltipComponent,
-    LegendComponent,
-  } from 'echarts/components';
   import { EChartsOption } from 'echarts';
-  import VChart from 'vue-echarts';
-  import { ref } from 'vue';
+  import BaseChart from '../withTS/components/charts/BaseChart.vue';
 
-  use([
-    CanvasRenderer,
-    PieChart,
-    TitleComponent,
-    TooltipComponent,
-    LegendComponent,
-  ])
-
-  const option = ref<EChartsOption>({
+  const option: EChartsOption = {
     title: {
       text: 'test pie chart',
       left: 'center',
@@ -64,17 +43,13 @@
         }
       ]
     }
-  })
+  }
 </script>
 
 <style scoped lang="scss">
   .test {
     width: 100%;
-    height: 100%;
+    height: 30rem;
     background-color: antiquewhite;
-  }
-
-  .echart {
-    height: 100vh;
   }
 </style>
