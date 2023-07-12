@@ -6,8 +6,8 @@
     </div>
     <!-- body -->
     <div class="widget__body">
-      <!-- TODO: HOC 적용하기 -->
-      <GridTable v-loading="isLoading" :tableData="tableData" />
+      <GridTable v-if="wigetType === 'GRID'" v-loading="isLoading" :tableData="tableData" />
+      <PieChart v-if="wigetType === 'PIE_CHART'" v-loading="isLoading" :pieChartData="tableData" />
     </div>
   </div>
 </template>
@@ -16,6 +16,7 @@
   import { computed } from 'vue';
   import { usePanel } from '../../../services/usePanel';
   import GridTable from '../table/GridTable/GridTable.vue';
+  import PieChart from '../charts/PieChart.vue';
   import { TableData } from '../table/GridTable/GridTable.type';
 
   interface Props {
@@ -42,7 +43,16 @@
     const title = data.value?.panelName;
     return title;
   })
-  const tableData = computed<TableData>(() => {
+  /**
+   * TODO: taged union type 으로 수정하기
+   *
+   */
+  // type WidgetType = "LINE_CHART" | "TABLE" | "GRID";
+  const wigetType = computed(() => {
+    const type = data.value?.panelType;
+    return type;
+  })
+  const tableData = computed(() => {
     const tempData = data.value ?? { columns: [], rows: [] } as TableData;
     return tempData;
   })
