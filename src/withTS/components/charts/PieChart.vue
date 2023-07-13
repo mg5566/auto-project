@@ -6,7 +6,7 @@
   import { computed } from 'vue';
   import BaseChart from './BaseChart.vue';
   import { PieChartData } from './PieChart.type';
-import { EChartsOption } from 'echarts';
+  import { EChartsOption } from 'echarts';
 
   interface Props {
     pieChartData: PieChartData

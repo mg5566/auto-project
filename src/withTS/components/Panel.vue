@@ -21,11 +21,11 @@
 
 <script setup lang="ts">
   import PanelItem from './PanelItem.vue';
-  import { Widget } from './Widget/WidgetList.type';
+  import { WidgetBase } from './Widget/WidgetList.type';
   import Divider from './Divider/Divider.vue';
 
   interface Props {
-    widgetList: Widget[];
+    widgetList: WidgetBase[];
   }
   defineProps<Props>();
 

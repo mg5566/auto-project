@@ -1,4 +1,4 @@
-import { Widget } from "../../Widget/WidgetList.type";
+import { WidgetBase } from "../../Widget/WidgetList.type";
 
   // Type 정의
 export type TableColumns = {
@@ -13,7 +13,7 @@ export type TableColumns = {
 export type TableRows = {
   [key: string]: string;
 }[];
-export interface TableData extends Widget {
+export interface TableData extends WidgetBase {
   panelType: 'TABLE' | 'GRID',
   columns: TableColumns,
   rows: TableRows,
