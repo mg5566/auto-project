@@ -6,8 +6,8 @@
     </div>
     <!-- body -->
     <div class="widget__body">
-      <GridTable v-if="wigetType === 'GRID'" v-loading="isLoading" :tableData="tableData" />
-      <PieChart v-if="wigetType === 'PIE_CHART'" v-loading="isLoading" :pieChartData="tableData" />
+      <PieChart v-if="data?.panelType === 'PIE_CHART'" v-loading="isLoading" :pieChartData="data" />
+      <GridTable v-if="data?.panelType === 'GRID'" v-loading="isLoading" :tableData="data" />
     </div>
   </div>
 </template>
@@ -17,7 +17,6 @@
   import { usePanel } from '../../../services/usePanel';
   import GridTable from '../table/GridTable/GridTable.vue';
   import PieChart from '../charts/PieChart.vue';
-  import { TableData } from '../table/GridTable/GridTable.type';
 
   interface Props {
     widgetId: string;
@@ -42,19 +41,6 @@
   const wigetTitle = computed(() => {
     const title = data.value?.panelName;
     return title;
-  })
-  /**
-   * TODO: taged union type 으로 수정하기
-   *
-   */
-  // type WidgetType = "LINE_CHART" | "TABLE" | "GRID";
-  const wigetType = computed(() => {
-    const type = data.value?.panelType;
-    return type;
-  })
-  const tableData = computed(() => {
-    const tempData = data.value ?? { columns: [], rows: [] } as TableData;
-    return tempData;
   })
 </script>
 

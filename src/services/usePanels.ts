@@ -1,14 +1,17 @@
 import { useQuery } from "@tanstack/vue-query";
+import axios from "axios";
 import { ComputedRef } from "vue";
+import { Widget } from "../withTS/components/Widget/WidgetList.type";
 
 const getPanels = async () => {
   try {
-    const response = await fetch("/panels");
-    return response.json();
+    const response = await axios.get<Widget[]>("/panels");
+    return response.data;
   } catch (error) {
     console.error(error);
   }
-}
+};
+
 export const usePanels = (enabled: ComputedRef<boolean>) => {
   return useQuery({
     queryKey: ["panels"],

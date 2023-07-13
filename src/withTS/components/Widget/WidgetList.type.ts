@@ -1,4 +1,4 @@
-export type WidgetType = "LINE_CHART" | "TABLE" | "GRID";
+export type WidgetType = "PIE_CHART" | "TABLE" | "GRID";
 
 export type Widget = {
   panelId: number,
@@ -6,3 +6,4 @@ export type Widget = {
   panelType: WidgetType,
   panelName: string,
 }
+

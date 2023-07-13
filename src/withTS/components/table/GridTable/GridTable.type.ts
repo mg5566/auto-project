@@ -1,3 +1,5 @@
+import { Widget } from "../../Widget/WidgetList.type";
+
   // Type 정의
 export type TableColumns = {
   label: string,
@@ -11,7 +13,8 @@ export type TableColumns = {
 export type TableRows = {
   [key: string]: string;
 }[];
-export type TableData = {
+export interface TableData extends Widget {
+  panelType: 'TABLE' | 'GRID',
   columns: TableColumns,
   rows: TableRows,
   [key: string]: any,

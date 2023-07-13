@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
   import PanelItem from './PanelItem.vue';
-  import { Widget } from './Dashboard/WidgetList.type';
+  import { Widget } from './Widget/WidgetList.type';
   import Divider from './Divider/Divider.vue';
 
   interface Props {
