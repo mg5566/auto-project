@@ -1,4 +1,4 @@
-import { Widget } from "../Widget/WidgetList.type";
+import { WidgetBase } from "../Widget/WidgetList.type";
 
 export type PieChartColumns = {
   label: string,
@@ -15,7 +15,7 @@ export type PieChartRows = {
   data: number,
 }[];
 
-export interface PieChartData extends Widget {
+export interface PieChartData extends WidgetBase {
   panelType: "PIE_CHART",
   columns: PieChartColumns,
   rows: PieChartRows,
