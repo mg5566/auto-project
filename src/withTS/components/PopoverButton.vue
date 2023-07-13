@@ -50,7 +50,11 @@
   }
 
   // fetch Panel list
-  const { data: widgetList, isLoading } = usePanels(computed(() => true));
+  const { data, isLoading } = usePanels(computed(() => true));
+  const widgetList = computed(() => {
+    const tempData = data.value ?? [];
+    return tempData;
+  });
 </script>
 
 <style scoped>
