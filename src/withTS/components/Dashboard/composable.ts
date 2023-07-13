@@ -18,6 +18,7 @@ export const useGridLayout = (
   const dropId = 'drop'
   const dragItem = { x: -1, y: -1, w: 3, h: 4, i: '', panelId: '' }
 
+  // id 말고, widgetData 통째로 넣어야합니다
   const handleDrag = throttle<(id: string) => void>((id) => {
     const parentRect = wrapper.value?.getBoundingClientRect()
 
@@ -36,7 +37,12 @@ export const useGridLayout = (
         w: 3,
         h: 4,
         i: dropId,
+        // 나중에 id 말고, 다르게 변경해야합니다.
         panelId: '',
+        panelName: '',
+        panelType: "GRID",
+        columns: [],
+        rows: [],
       })
     }
 
@@ -94,7 +100,11 @@ export const useGridLayout = (
       w: dragItem.w,
       h: dragItem.h,
       i: dragItem.i,
-      panelId: dragItem.panelId
+      panelId: dragItem.panelId,
+      panelName: '',
+      panelType: "GRID",
+      columns: [],
+      rows: [],
     })
     gridLayout.value.dragEvent('dragend', dragItem.i, dragItem.x, dragItem.y, dragItem.h, dragItem.w)
 

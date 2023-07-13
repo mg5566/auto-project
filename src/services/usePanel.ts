@@ -1,12 +1,11 @@
 import { useQuery } from "@tanstack/vue-query";
 import axios from "axios";
 import { ComputedRef } from "vue";
-import { PieChartData } from "../withTS/components/charts/PieChart.type";
-import { TableData } from "../withTS/components/table/GridTable/GridTable.type";
+import { WidgetData } from "../withTS/components/Widget/WidgetList.type";
 
-const getPanel = (panelId: string) => async () => {
+const getPanel = async (panelId: string) => {
   try {
-    const response = await axios.get<PieChartData | TableData>(`/panel/${panelId}`)
+    const response = await axios.get<WidgetData>(`/panel/${panelId}`)
     return response.data;
   } catch (error) {
     console.error(error);
@@ -16,7 +15,7 @@ const getPanel = (panelId: string) => async () => {
 export const usePanel = (panelId: string, enabled: ComputedRef<boolean>) => {
   return useQuery({
     queryKey: ["panel", panelId],
-    queryFn: getPanel(panelId),
+    queryFn: () => getPanel(panelId),
     enabled,
   });
 };
