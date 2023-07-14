@@ -6,8 +6,8 @@
     </div>
     <!-- body -->
     <div class="widget__body">
-      <PieChart v-if="data?.panelType === 'PIE_CHART'" v-loading="isLoading" :pieChartData="data" />
-      <GridTable v-if="data?.panelType === 'GRID'" v-loading="isLoading" :tableData="data" />
+      <PieChart v-if="pieChart" :pieChartData="pieChart" />
+      <GridTable v-if="gridTable" :tableData="gridTable" />
     </div>
   </div>
 </template>
@@ -17,9 +17,10 @@
   import { usePanel } from '../../../services/usePanel';
   import GridTable from '../table/GridTable/GridTable.vue';
   import PieChart from '../charts/PieChart.vue';
+  import { LayoutStore } from '../../../store/useLayoutStore';
 
   interface Props {
-    widgetId: string;
+    widget: LayoutStore;
   }
   const props = defineProps<Props>();
 
@@ -36,11 +37,24 @@
   /**
    * fetch Panel
    */
-  const { data, isLoading } = usePanel(props.widgetId, computed(() => !!props.widgetId));
+  // const { data, isLoading } = usePanel(props.widget, computed(() => !!props.widgetId));
 
   const wigetTitle = computed(() => {
-    const title = data.value?.panelName;
+    const title = props.widget.panelName;
     return title;
+  })
+
+  const pieChart = computed(() => {
+    if (props.widget.panelType === 'PIE_CHART') {
+      return props.widget;
+    }
+    return undefined
+  })
+  const gridTable = computed(() => {
+    if (props.widget.panelType === 'GRID') {
+      return props.widget;
+    }
+    return undefined
   })
 </script>
 

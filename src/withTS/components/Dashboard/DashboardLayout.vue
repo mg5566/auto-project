@@ -22,7 +22,7 @@
           :min-h="4"
         >
           <Widget
-            :widget-id="item.panelId"
+            :widget="item"
           />
         </GridItem>
       </GridLayout>
