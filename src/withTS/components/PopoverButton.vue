@@ -54,7 +54,6 @@
   const { data, isLoading } = usePanels(computed(() => true));
   const widgetList = computed(() => {
     const tempData = data.value ?? [];
-    console.log('temp data', tempData)
     return tempData;
   });
 </script>

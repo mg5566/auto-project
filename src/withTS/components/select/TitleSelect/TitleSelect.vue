@@ -21,7 +21,7 @@
   interface Props {
     title: string;
     options: SelectOptions;
-    modelValue: string;
+    modelValue: string | undefined;
   }
   const props = defineProps<Props>();
 
@@ -33,13 +33,13 @@
      * value?: string 은 value 를 전달하지 않을 수도 있다는 의미이고,
      * value: sring | undefined 는 2번째 argument 를 무조건 전달하는데, undefined 와 string 둘 중 하나를 전달한다는 의미이다.
      */
-    (e: 'update:modelValue', value: string): void;
+    (e: 'update:modelValue', value: string | undefined): void;
   }
   const emit = defineEmits<Emits>();
 
   const selectedValue = computed({
     get: () => props.modelValue,
-    set: (value) => emit('update:modelValue', value)
+    set: (value) => emit('update:modelValue', value ?? undefined)
   })
 </script>
 

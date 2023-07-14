@@ -18,11 +18,6 @@ export const useLayoutStore = defineStore('layout', () => {
     })
   }
 
-  // TODO: layout 을 update 하는 함수를 만들어야합니다.
-  // delete, add
-  // const deleteLayout = (id: string) => {}
-  // const addLayout = (layoutItem: LayoutItem) => {}
-
   type ModifyLayout = (id: string, width: number, height: number) => void;
   const modifyLayout = throttle<ModifyLayout>((id, width, height) => {
     if (layout.value.find((item) => item.i === id)) {

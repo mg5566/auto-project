@@ -22,7 +22,8 @@
           :min-h="4"
         >
           <Widget
-            :widget-id="item.panelId"
+            :widget="item"
+            @open-widget-editor="handleOpenWidgetEditor"
           />
         </GridItem>
       </GridLayout>
@@ -33,6 +34,11 @@
     @drag-end="handleDragEnd"
     @drag-over="handleDragOver"
   />
+  <EditWidgetModal
+    v-if="selectedWidget"
+    v-model="isOpenWidgetEditor"
+    :selected-widget="selectedWidget"
+  />
 </template>
 
 <script setup>
@@ -41,6 +47,7 @@
   import PopoverButton from '../PopoverButton.vue';
   import { useGridLayout } from './composable';
   import Widget from '../Widget/Widget.vue';
+  import EditWidgetModal from '../Widget/EditWidgetModal.vue';
 
   const wrapper = ref()
   const gridLayout = ref();
@@ -51,6 +58,16 @@
     handleDragOver,
     handleDragEnd
   } = useGridLayout(wrapper, gridLayout);
+
+  /**
+   * Widget Editor
+   */
+   const isOpenWidgetEditor = ref(false);
+  const selectedWidget = ref();
+  const handleOpenWidgetEditor = (widget) => {
+    isOpenWidgetEditor.value = true;
+    selectedWidget.value = widget;
+  };
 </script>
 
 <style scoped lang="scss">

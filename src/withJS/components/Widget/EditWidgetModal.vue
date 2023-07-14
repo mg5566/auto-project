@@ -21,26 +21,32 @@
   </el-dialog>
 </template>
 
-<script setup lang="ts">
+<script setup>
   import { computed, ref, watch } from 'vue';
   import TitleSelect from '../select/TitleSelect/TitleSelect.vue';
-  import { LayoutStore, useLayoutStore } from '../../../store/useLayoutStore';
+  import { useLayoutStore } from '../../../store/useLayoutStore';
 
-  interface Props {
-    modelValue: boolean;
-    selectedWidget: LayoutStore;
-  }
-  const props = defineProps<Props>();
+  const props = defineProps({
+    modelValue: {
+      type: Boolean,
+      required: true
+    },
+    selectedWidget: {
+      type: Object,
+      required: true
+    }
+  });
 
-  interface Emits {
-    (e: 'update:modelValue', value: boolean): void;
-  }
-  const emit = defineEmits<Emits>();
+  const emit = defineEmits(['update:modelValue']);
 
   const isOpen = computed({
     get() {
       return props.modelValue;
     },
+    /**
+     *
+     * @param {boolean} value
+     */
     set(value) {
       emit('update:modelValue', value);
     }
@@ -51,7 +57,7 @@
     return tempData;
   })
 
-  const aligns = ref<string[]>(props.selectedWidget.columns.map((item) => item.align ?? 'left'));
+  const aligns = ref(props.selectedWidget.columns.map((item) => item.align ?? 'left'));
   watch(columns, () => {
     if (columns) {
       columns.value.forEach((column) => {
@@ -77,8 +83,6 @@
 
   const layoutStore = useLayoutStore();
   const handleSave = () => {
-    console.log('save');
-
     layoutStore.updateColumnsAligns(props.selectedWidget.i.toString(), aligns.value);
 
     aligns.value = [];
@@ -86,8 +90,6 @@
   }
 
   const handleClose = () => {
-    console.log('close');
-
     aligns.value = [];
     emit('update:modelValue', false);
   }
