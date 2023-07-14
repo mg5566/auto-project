@@ -1,14 +1,16 @@
 import { WidgetBase } from "../Widget/WidgetList.type";
 
-export type PieChartColumns = {
+export type ColumnBase = {
   label: string,
-  prop: null,
-  align: null,
-  width: null,
-  value: "CAR1",
-  type: null,
-  backgroundColor: null
-}[];
+  prop: string,
+  align: string,
+  width: string,
+  value: string,
+  type: string,
+  backgroundColor?: string
+}
+
+export type PieChartColumns = ColumnBase[];
 
 export type PieChartRows = {
   name: string,

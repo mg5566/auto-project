@@ -1,15 +1,8 @@
 import { WidgetBase } from "../../Widget/WidgetList.type";
+import { ColumnBase } from "../../charts/PieChart.type";
 
-  // Type 정의
-export type TableColumns = {
-  label: string,
-  prop: string,
-  align: string,
-  width: number,
-  value?: string,
-  type: string,
-  backgroundColor?: string
-}[];
+// Type 정의
+export type TableColumns = ColumnBase[];
 export type TableRows = {
   [key: string]: string;
 }[];
