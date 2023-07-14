@@ -28,22 +28,13 @@
     },
     modelValue: {
       type: String,
-      required: true
+      required: false,
+      default: undefined,
     }
   });
 
   const emit = defineEmits({
-    /**
-     *
-     * @param {string} value
-     */
-     'update:modelValue': (value) => {
-      if (value && typeof value === 'string') {
-        return true;
-      }
-      console.error('Invalid update:modelValue event payload')
-      return false;
-    },
+     'update:modelValue': (value) => true,
   });
 
   const selectedValue = computed({

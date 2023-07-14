@@ -37,24 +37,16 @@
     }
   });
 
-  const emit = defineEmits({
-    /**
-     *
-     * @param {boolean} value
-     */
-    'update:modelValue': (value) => {
-      if (value && typeof value === 'boolean') {
-        return true;
-      }
-      console.error('Invalid update:modelValue event payload')
-      return false;
-    },
-  });
+  const emit = defineEmits(['update:modelValue']);
 
   const isOpen = computed({
     get() {
       return props.modelValue;
     },
+    /**
+     *
+     * @param {boolean} value
+     */
     set(value) {
       emit('update:modelValue', value);
     }

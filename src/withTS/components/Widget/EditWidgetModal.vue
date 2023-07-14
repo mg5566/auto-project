@@ -55,7 +55,6 @@
   watch(columns, () => {
     if (columns) {
       columns.value.forEach((column) => {
-        // const align = ref(column.align ?? 'left');
         aligns.value?.push(column.align ?? 'left');
       });
     }
