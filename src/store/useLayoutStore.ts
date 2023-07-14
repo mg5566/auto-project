@@ -9,9 +9,14 @@ export type LayoutStore = LayoutItem & WidgetData;
 export const useLayoutStore = defineStore('layout', () => {
   const layout = ref<LayoutStore[]>([])
 
-  watch(layout, () => {
-    console.log(layout.value)
-  })
+  const updateColumnsAligns = (layoutIndex: string, aligns: string[]) => {
+    layout.value = layout.value.map((item) => {
+      if (item.i === layoutIndex) {
+        return { ...item, columns: item.columns.map((column, index) => ({ ...column, align: aligns[index] })) }
+      }
+      return item
+    })
+  }
 
   // TODO: layout 을 update 하는 함수를 만들어야합니다.
   // delete, add
@@ -30,5 +35,5 @@ export const useLayoutStore = defineStore('layout', () => {
     }
   })
 
-  return { layout, modifyLayout };
+  return { layout, modifyLayout, updateColumnsAligns };
 });

@@ -1,14 +1,16 @@
 <template>
-  <div>{{ title }}</div>
-  <div>
-    <el-select v-model="selectedValue">
-      <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
-      />
-    </el-select>
+  <div class="title-select-container">
+    <div>{{ title }}</div>
+    <div>
+      <el-select v-model="selectedValue">
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
+    </div>
   </div>
 </template>
 
@@ -19,7 +21,7 @@
   interface Props {
     title: string;
     options: SelectOptions;
-    modelValue: string | undefined;
+    modelValue: string;
   }
   const props = defineProps<Props>();
 
@@ -31,7 +33,7 @@
      * value?: string 은 value 를 전달하지 않을 수도 있다는 의미이고,
      * value: sring | undefined 는 2번째 argument 를 무조건 전달하는데, undefined 와 string 둘 중 하나를 전달한다는 의미이다.
      */
-    (e: 'update:modelValue', value: string | undefined): void;
+    (e: 'update:modelValue', value: string): void;
   }
   const emit = defineEmits<Emits>();
 
@@ -40,3 +42,16 @@
     set: (value) => emit('update:modelValue', value)
   })
 </script>
+
+<style scoped lang="scss">
+  .title-select-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    :deep(.el-input) {
+      width: 7rem;
+    }
+  }
+</style>

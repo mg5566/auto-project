@@ -5,6 +5,15 @@
     </template>
     <!-- color 변경 -->
     <!-- align 변경 -->
+    <div class="align">
+      <TitleSelect
+        v-for="(column, index) in columns"
+        :key="index"
+        :title="column.label"
+        :options="options"
+        v-model="aligns[index]"
+      />
+    </div>
     <template #footer>
       <el-button type="warning" @click="handleClose">close</el-button>
       <el-button type="primary" @click="handleSave">save</el-button>
@@ -36,13 +45,51 @@
       emit('update:modelValue', value);
     }
   })
+
+  const columns = computed(() => {
+    const tempData = props.selectedWidget.columns;
+    return tempData;
+  })
+
+  const aligns = ref<string[]>(props.selectedWidget.columns.map((item) => item.align ?? 'left'));
+  watch(columns, () => {
+    if (columns) {
+      columns.value.forEach((column) => {
+        // const align = ref(column.align ?? 'left');
+        aligns.value?.push(column.align ?? 'left');
+      });
+    }
+  });
+
+  const options = [
+    {
+      label: 'left',
+      value: 'left',
+    },
+    {
+      label: 'center',
+      value: 'center',
+    },
+    {
+      label: 'right',
+      value: 'right',
+    },
+  ]
+
+  const layoutStore = useLayoutStore();
   const handleSave = () => {
+    console.log('save');
+
+    layoutStore.updateColumnsAligns(props.selectedWidget.i.toString(), aligns.value);
+
+    aligns.value = [];
     emit('update:modelValue', false);
   }
 
   const handleClose = () => {
     console.log('close');
 
+    aligns.value = [];
     emit('update:modelValue', false);
   }
 </script>
