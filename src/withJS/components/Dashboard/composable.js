@@ -19,9 +19,20 @@ export const useGridLayout = (
   }
 
   const dropId = 'drop'
-  const dragItem = { x: -1, y: -1, w: 3, h: 4, i: '', panelId: '' }
+  const dragItem = {
+    x: -1,
+    y: -1,
+    w: 3,
+    h: 4,
+    i: '',
+    panelId: '',
+    panelName: '',
+    panelType: '',
+    columns: [],
+    rows: [],
+  }
 
-  const handleDrag = throttle((id) => {
+  const handleDrag = throttle((widget) => {
     const parentRect = wrapper.value?.getBoundingClientRect()
 
     if (!parentRect || !gridLayout.value) return
@@ -39,7 +50,7 @@ export const useGridLayout = (
         w: 3,
         h: 4,
         i: dropId,
-        panelId: '',
+        ...widget
       })
     }
 
@@ -65,7 +76,11 @@ export const useGridLayout = (
         dragItem.i = index.toString();
         dragItem.x = layoutStore.layout[index].x
         dragItem.y = layoutStore.layout[index].y
-        dragItem.panelId = id;
+        dragItem.panelId = widget.panelId;
+        dragItem.panelType = widget.panelType;
+        dragItem.panelName = widget.panelName;
+        dragItem.columns = widget.columns;
+        dragItem.rows = widget.rows;
       } else {
         gridLayout.value.dragEvent('dragend', dropId, newPos.x, newPos.y, dragItem.h, dragItem.w)
         layoutStore.layout = layoutStore.layout.filter(item => item.i !== dropId)
@@ -98,6 +113,10 @@ export const useGridLayout = (
       h: dragItem.h,
       i: dragItem.i,
       panelId: dragItem.panelId,
+      panelName: dragItem.panelName,
+      panelType: dragItem.panelType,
+      columns: dragItem.columns,
+      rows: dragItem.rows,
     })
     gridLayout.value.dragEvent('dragend', dragItem.i, dragItem.x, dragItem.y, dragItem.h, dragItem.w)
 

@@ -1,11 +1,17 @@
 <template>
   <div ref="outerContainer" class="table-continer">
-    <el-table :data="rowsData" :border="true" width="100%" :height="maxHeight" table-layout="auto">
+    <el-table
+      :data="rowsData"
+      :border="true"
+      width="100%"
+      :height="maxHeight"
+    >
       <el-table-column
         v-for="column in columnsData"
         :key="column.label"
         :label="column.label"
         :prop="column.prop"
+        :align="column.align"
       />
     </el-table>
   </div>

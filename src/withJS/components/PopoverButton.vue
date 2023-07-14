@@ -6,6 +6,7 @@
     @dragover="handleDragOver"
   ></div>
   <Panel
+    v-loading="isLoading"
     v-if="isOpen"
     :widgetList="widgetList"
     @dragForAddWidget="handleDrag"
@@ -23,10 +24,10 @@
   const emit = defineEmits({
     /**
      *
-     * @param {string} id
+     * @param {object} widget
      */
-    dragForAddWidget: (id) => {
-      if (id) {
+    dragForAddWidget: (widget) => {
+      if (widget) {
         return true;
       }
       console.warn('Invalid dragForAddWidget event payload')
@@ -35,10 +36,10 @@
     dragEnd: () => true,
     /**
      *
-     * @param {DragEvent} event
+     * @param {DragEvent} value
      */
-    dragOver: (event) => {
-      if (event) {
+    dragOver: (value) => {
+      if (value) {
 				return true;
 			}
       console.warn('Invalid dragOver event payload')
@@ -50,10 +51,10 @@
 
   /**
    *
-   * @param {string} id
+   * @param {object} widget
    */
-  const handleDrag = (id) => {
-    emit('dragForAddWidget', id);
+  const handleDrag = (widget) => {
+    emit('dragForAddWidget', widget);
   }
   const handleDragEnd = () => {
     emit('dragEnd');
@@ -76,7 +77,11 @@
   }
 
   // fetch Panel list
-  const { data: widgetList, isLoading } = usePanels(computed(() => true));
+  const { data, isLoading } = usePanels(computed(() => true));
+  const widgetList = computed(() => {
+    const tempData = data.value ?? [];
+    return tempData;
+  });
 </script>
 
 <style scoped>

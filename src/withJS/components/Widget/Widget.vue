@@ -3,11 +3,12 @@
     <!-- header -->
     <div class="widget__header">
       <div>{{ wigetTitle }}</div>
+      <button v-if="gridTable" @click="handleOpenEditor">edit</button>
     </div>
     <!-- body -->
     <div class="widget__body">
-      <!-- TODO: HOC 적용하기 -->
-      <GridTable v-loading="isLoading" :tableData="tableData" />
+      <PieChart v-if="pieChart" :pieChartData="pieChart" />
+      <GridTable v-if="gridTable" :tableData="gridTable" />
     </div>
   </div>
 </template>
@@ -16,36 +17,51 @@
   import { computed } from 'vue';
   import { usePanel } from '../../../services/usePanel';
   import GridTable from '../table/GridTable/GridTable.vue';
+  import PieChart from '../charts/PieChart.vue';
 
   const props = defineProps({
-    widgetId: {
-      type: String,
+    widget: {
+      type: Object,
       required: true
     }
   });
 
-  // interface Emits {
-  //   (e: 'openWidgetEditor', id: string): void;
-  // }
-  // const emit = defineEmits<Emits>();
+  const emit = defineEmits({
+    'openWidgetEditor': (widget) => {
+      if (widget && typeof widget === 'object') {
+        return true;
+      }
+      console.error('Invalid openWidgetEditor event payload')
+      return false;
+    },
+  });
 
-  // const handleOpenEditor = () => {
-  //   console.log('click edit');
-  //   emit('openWidgetEditor', props.widgetId);
-  // };
+  const handleOpenEditor = () => {
+    console.log('click edit');
+    emit('openWidgetEditor', props.widget);
+  };
 
   /**
    * fetch Panel
    */
-  const { data, isLoading } = usePanel(props.widgetId, computed(() => !!props.widgetId));
+  // const { data, isLoading } = usePanel(props.widgetId, computed(() => !!props.widgetId));
 
   const wigetTitle = computed(() => {
-    const title = data.value?.panelName;
+    const title = props.widget.panelName;
     return title;
   })
-  const tableData = computed(() => {
-    const tempData = data.value ?? { columns: [], rows: [] };
-    return tempData;
+
+  const pieChart = computed(() => {
+    if (props.widget.panelType === 'PIE_CHART') {
+      return props.widget;
+    }
+    return undefined
+  })
+  const gridTable = computed(() => {
+    if (props.widget.panelType === 'GRID') {
+      return props.widget;
+    }
+    return undefined
   })
 </script>
 

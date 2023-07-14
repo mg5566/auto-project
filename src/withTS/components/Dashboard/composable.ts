@@ -50,13 +50,7 @@ export const useGridLayout = (
         w: 3,
         h: 4,
         i: dropId,
-        // 나중에 id 말고, 다르게 변경해야합니다.
         ...widget
-        // panelId: '',
-        // panelName: '',
-        // panelType: "GRID",
-        // columns: [],
-        // rows: [],
       })
     }
 
