@@ -23,6 +23,7 @@
         >
           <Widget
             :widget="item"
+            @open-widget-editor="handleOpenWidgetEditor"
           />
         </GridItem>
       </GridLayout>
@@ -33,7 +34,11 @@
     @drag-end="handleDragEnd"
     @drag-over="handleDragOver"
   />
-  <!-- <EditWidgetModal v-model="isOpenWidgetEditor" :selectedWidget="selectedWidget"/> -->
+  <EditWidgetModal
+    v-if="selectedWidget"
+    v-model="isOpenWidgetEditor"
+    :selected-widget="selectedWidget"
+  />
 </template>
 
 <script setup lang="ts">
@@ -42,7 +47,8 @@
   import PopoverButton from '../PopoverButton.vue';
   import { useGridLayout } from './composable';
   import Widget from '../Widget/Widget.vue';
-  // import EditWidgetModal from '../Widget/EditWidgetModal.vue';
+  import EditWidgetModal from '../Widget/EditWidgetModal.vue';
+  import { LayoutStore } from '../../../store/useLayoutStore';
 
   const wrapper = ref<HTMLElement>()
   const gridLayout = ref<InstanceType<typeof GridLayout>>();
@@ -57,12 +63,12 @@
   /**
    * Widget Editor
    */
-  // const isOpenWidgetEditor = ref(false);
-  // const selectedWidget = ref('');
-  // const handleOpenWidgetEditor = (id: string) => {
-  //   isOpenWidgetEditor.value = true;
-  //   selectedWidget.value = id;
-  // };
+  const isOpenWidgetEditor = ref(false);
+  const selectedWidget = ref<LayoutStore>();
+  const handleOpenWidgetEditor = (widget: LayoutStore) => {
+    isOpenWidgetEditor.value = true;
+    selectedWidget.value = widget;
+  };
 </script>
 
 <style scoped lang="scss">

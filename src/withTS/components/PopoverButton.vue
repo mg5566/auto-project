@@ -20,9 +20,10 @@
   import PlusButton from './buttons/PlusButton/PlusButton.vue';
   import Panel from './Panel.vue';
   import { usePanels } from '../../services/usePanels';
+  import { WidgetData } from './Widget/WidgetList.type';
 
   interface Emits {
-    (event: 'dragForAddWidget', id: string): void;
+    (event: 'dragForAddWidget', widget: WidgetData): void;
     (event: 'dragEnd'): void;
     (event: 'dragOver', value: DragEvent): void;
   }
@@ -30,8 +31,8 @@
 
   const isOpen = ref(false);
 
-  const handleDrag = (id: string) => {
-    emit('dragForAddWidget', id);
+  const handleDrag = (widget: WidgetData) => {
+    emit('dragForAddWidget', widget);
   }
   const handleDragEnd = () => {
     emit('dragEnd');
@@ -53,6 +54,7 @@
   const { data, isLoading } = usePanels(computed(() => true));
   const widgetList = computed(() => {
     const tempData = data.value ?? [];
+    console.log('temp data', tempData)
     return tempData;
   });
 </script>

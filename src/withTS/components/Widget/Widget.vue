@@ -3,6 +3,8 @@
     <!-- header -->
     <div class="widget__header">
       <div>{{ wigetTitle }}</div>
+      <!-- TODO: edit button -->
+      <button v-if="gridTable" @click="handleOpenEditor">edit</button>
     </div>
     <!-- body -->
     <div class="widget__body">
@@ -14,7 +16,6 @@
 
 <script setup lang="ts">
   import { computed } from 'vue';
-  import { usePanel } from '../../../services/usePanel';
   import GridTable from '../table/GridTable/GridTable.vue';
   import PieChart from '../charts/PieChart.vue';
   import { LayoutStore } from '../../../store/useLayoutStore';
@@ -24,15 +25,15 @@
   }
   const props = defineProps<Props>();
 
-  // interface Emits {
-  //   (e: 'openWidgetEditor', id: string): void;
-  // }
-  // const emit = defineEmits<Emits>();
+  interface Emits {
+    (e: 'openWidgetEditor', widget: LayoutStore): void;
+  }
+  const emit = defineEmits<Emits>();
 
-  // const handleOpenEditor = () => {
-  //   console.log('click edit');
-  //   emit('openWidgetEditor', props.widgetId);
-  // };
+  const handleOpenEditor = () => {
+    console.log('click edit');
+    emit('openWidgetEditor', props.widget);
+  };
 
   /**
    * fetch Panel
