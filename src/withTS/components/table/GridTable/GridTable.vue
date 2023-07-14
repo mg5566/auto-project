@@ -11,6 +11,7 @@
         :key="column.label"
         :label="column.label"
         :prop="column.prop"
+        :align="column.align"
       />
     </el-table>
   </div>

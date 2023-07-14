@@ -2,6 +2,7 @@ import { GridLayout } from "grid-layout-plus";
 import { Ref, reactive } from "vue";
 import { throttle } from 'lodash';
 import { useLayoutStore } from "../../../store/useLayoutStore";
+import { WidgetData } from "../Widget/WidgetList.type";
 
 export const useGridLayout = (
     wrapper: Ref<HTMLElement | undefined>,
@@ -16,10 +17,22 @@ export const useGridLayout = (
   }
 
   const dropId = 'drop'
-  const dragItem = { x: -1, y: -1, w: 3, h: 4, i: '', panelId: '' }
+  const dragItem = {
+    x: -1,
+    y: -1,
+    w: 3,
+    h: 4,
+    i: '',
+    panelId: '',
+    panelName: '',
+    panelType: '',
+    columns: [] as unknown,
+    rows: [] as unknown,
+  }
 
   // id 말고, widgetData 통째로 넣어야합니다
-  const handleDrag = throttle<(id: string) => void>((id) => {
+  const handleDrag = throttle<(widget: WidgetData) => void>((widget) => {
+  // const handleDrag = throttle<(id: string) => void>((id) => {
     const parentRect = wrapper.value?.getBoundingClientRect()
 
     if (!parentRect || !gridLayout.value) return
@@ -38,11 +51,12 @@ export const useGridLayout = (
         h: 4,
         i: dropId,
         // 나중에 id 말고, 다르게 변경해야합니다.
-        panelId: '',
-        panelName: '',
-        panelType: "GRID",
-        columns: [],
-        rows: [],
+        ...widget
+        // panelId: '',
+        // panelName: '',
+        // panelType: "GRID",
+        // columns: [],
+        // rows: [],
       })
     }
 
@@ -68,7 +82,11 @@ export const useGridLayout = (
         dragItem.i = String(index)
         dragItem.x = layoutStore.layout[index].x
         dragItem.y = layoutStore.layout[index].y
-        dragItem.panelId = id;
+        dragItem.panelId = widget.panelId;
+        dragItem.panelType = widget.panelType;
+        dragItem.panelName = widget.panelName;
+        dragItem.columns = widget.columns;
+        dragItem.rows = widget.rows;
       } else {
         gridLayout.value.dragEvent('dragend', dropId, newPos.x, newPos.y, dragItem.h, dragItem.w)
         layoutStore.layout = layoutStore.layout.filter(item => item.i !== dropId)
@@ -101,10 +119,10 @@ export const useGridLayout = (
       h: dragItem.h,
       i: dragItem.i,
       panelId: dragItem.panelId,
-      panelName: '',
-      panelType: "GRID",
-      columns: [],
-      rows: [],
+      panelName: dragItem.panelName,
+      panelType: dragItem.panelType as "PIE_CHART" | "TABLE" | "GRID",
+      columns: dragItem.columns as any,
+      rows: dragItem.rows as any,
     })
     gridLayout.value.dragEvent('dragend', dragItem.i, dragItem.x, dragItem.y, dragItem.h, dragItem.w)
 

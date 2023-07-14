@@ -10,7 +10,7 @@
         v-for="widget in widgetList"
         :key="widget.panelId"
         :draggable="true"
-        @drag="handleDrag(widget.panelId.toString())"
+        @drag="handleDrag(widget)"
         @dragend="handleDragEnd"
       >
         {{ widget.panelName }}
@@ -21,22 +21,22 @@
 
 <script setup lang="ts">
   import PanelItem from './PanelItem.vue';
-  import { WidgetBase } from './Widget/WidgetList.type';
+  import { WidgetData } from './Widget/WidgetList.type';
   import Divider from './Divider/Divider.vue';
 
   interface Props {
-    widgetList: WidgetBase[];
+    widgetList: WidgetData[];
   }
   defineProps<Props>();
 
   interface Emits {
-    (event: 'dragForAddWidget', id: string): void;
+    (event: 'dragForAddWidget', widget: WidgetData): void;
     (event: 'dragEnd'): void;
   }
   const emit = defineEmits<Emits>();
 
-  const handleDrag = (id: string) => {
-    emit('dragForAddWidget', id);
+  const handleDrag = (widget: WidgetData) => {
+    emit('dragForAddWidget', widget);
   }
   const handleDragEnd = () => {
     emit('dragEnd');
