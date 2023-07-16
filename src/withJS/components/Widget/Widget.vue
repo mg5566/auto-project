@@ -7,6 +7,7 @@
     </div>
     <!-- body -->
     <div class="widget__body">
+      <LineChart v-if="lineChart" :line-chart-data="lineChart" />
       <PieChart v-if="pieChart" :pieChartData="pieChart" />
       <GridTable v-if="gridTable" :tableData="gridTable" />
     </div>
@@ -17,6 +18,7 @@
   import { computed } from 'vue';
   import { usePanel } from '../../../services/usePanel';
   import GridTable from '../table/GridTable/GridTable.vue';
+  import LineChart from '../charts/LineChart.vue';
   import PieChart from '../charts/PieChart.vue';
 
   const props = defineProps({
@@ -49,6 +51,13 @@
   const wigetTitle = computed(() => {
     const title = props.widget.panelName;
     return title;
+  })
+
+  const lineChart = computed(() => {
+    if (props.widget.panelType === 'LINE_CHART') {
+      return props.widget;
+    }
+    return undefined
   })
 
   const pieChart = computed(() => {
