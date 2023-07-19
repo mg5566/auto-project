@@ -1,10 +1,12 @@
 <template>
+  <!-- background 영역 -->
   <div
     v-if="isOpen"
     class="background"
     @click="handleClose"
     @dragover="handleDragOver"
   ></div>
+  <!-- Panel List -->
   <Panel
     v-loading="isLoading"
     v-if="isOpen"
@@ -12,6 +14,7 @@
     @dragForAddWidget="handleDrag"
     @dragEnd="handleDragEnd"
   />
+  <!-- Plus Button -->
   <PlusButton v-if="!isOpen" class="position" @click="handleOpen"/>
 </template>
 
