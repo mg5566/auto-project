@@ -1,11 +1,10 @@
-import { RouteRecordRaw } from 'vue-router';
+import { RouteRecordRaw, createRouter, createWebHashHistory } from 'vue-router';
 import WithTS from '../pages/WithTS.vue';
 import WithJS from '../pages/WithJS.vue';
 import Fallback from '../pages/Fallback.vue';
 import TestPage from '../pages/TestPage.vue';
-import { createRouter, createWebHashHistory } from 'vue-router';
 
-export const routes: RouteRecordRaw[] = [
+const routeRecords: RouteRecordRaw[] = [
   {
     path: '/',
     redirect: '/with-ts',
@@ -32,5 +31,5 @@ export const routes: RouteRecordRaw[] = [
 
 export const router = createRouter({
   history: createWebHashHistory(),
-  routes,
+  routes: routeRecords,
 })
