@@ -31,6 +31,12 @@
     TooltipComponent,
   ])
 
+  /**
+   * 'width' Specify width explicitly, in pixel. If setting to null/undefined/'auto', width of dom (instance container) will be used.
+   * 'height' Specify height explicitly, in pixel. If setting to null/undefined/'auto', height of dom (instance container) will be used.
+   *
+   * https://echarts.apache.org/en/api.html#echarts.init
+   */
   const initOption = {
     width: 'auto',
     height: 'auto'
