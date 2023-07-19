@@ -1,7 +1,4 @@
 <template>
-  <div>
-    임시 line chart component
-  </div>
   <BaseChart :option="lineChartOption" />
 </template>
 

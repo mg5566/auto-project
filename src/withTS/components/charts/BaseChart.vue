@@ -1,6 +1,7 @@
 <template>
   <v-chart
     class="echart"
+    :init-options="initOption"
     :option="option"
     :autoresize="true"
   />
@@ -29,6 +30,11 @@
     LineChart,
     TooltipComponent,
   ])
+
+  const initOption = {
+    width: 'auto',
+    height: 'auto'
+  }
 </script>
 
 <style scoped lang="scss">
